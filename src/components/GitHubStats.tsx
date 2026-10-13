@@ -1,25 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
 import { Star, GitFork, Eye, BookOpen } from "lucide-react";
 import { GithubIcon } from "./BrandIcons";
 import React, { useEffect, useState } from "react";
 
 export default function GitHubStats() {
-  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Avoid hydration mismatch for dynamic theme queries
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const username = "cheamnorakpanha";
 
-  // Build API URLs using next-themes state if resolved
-  const isDark = resolvedTheme === "dark";
-  const themeParam = isDark ? "tokyonight" : "default";
+  // Hardcoded to dark mode theme
+  const themeParam = "tokyonight";
   
   // Custom API configurations for premium styling matching colors
   const statsUrl = `https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=${themeParam}&title_color=3b82f6&icon_color=06b6d4&text_color=888888&bg_color=00000000&hide_border=true&count_private=true`;
@@ -60,7 +56,7 @@ export default function GitHubStats() {
                 <img
                   src={chartUrl}
                   alt={`${username}'s Github Chart`}
-                  className="min-w-[650px] md:min-w-0 max-w-full h-auto filter dark:hue-rotate-180 dark:invert transition-all"
+                  className="min-w-[650px] md:min-w-0 max-w-full h-auto filter hue-rotate-180 invert transition-all"
                   loading="lazy"
                 />
               )}

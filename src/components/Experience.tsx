@@ -1,7 +1,17 @@
 "use client";
 
+import React from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Calendar, Building, Tag } from "lucide-react";
+import {
+  Briefcase,
+  Calendar,
+  Building,
+  GraduationCap,
+  Award,
+  FileDown,
+  Sparkles,
+  ArrowUpRight,
+} from "lucide-react";
 
 interface Job {
   company: string;
@@ -21,7 +31,7 @@ const experienceData: Job[] = [
     tags: ["Flutter", "Dart", "Git", "REST APIs", "Mobile UI Design"],
   },
   {
-    company: "Institute of Foreign Language (IFL)",
+    company: "Institute of Foreign Languages (IFL)",
     position: "Media & Website Coordinator (Freelance)",
     duration: "Apr 2025 – Jun 2025",
     description:
@@ -30,90 +40,219 @@ const experienceData: Job[] = [
   },
 ];
 
+const educationData = [
+  {
+    degree: "Bachelor of IT Engineering",
+    institution: "Royal University of Phnom Penh (RUPP)",
+    duration: "2021 – 2025",
+    details:
+      "Specialized in Software Engineering, database systems design, enterprise Java development (Spring Boot), web systems, and cloud computing environments.",
+  },
+  {
+    degree: "Bachelor of Professional Communication",
+    institution: "Institute of Foreign Languages (IFL)",
+    duration: "2021 – 2025",
+    details:
+      "Focused on professional writing, media coordination, organizational communications, leadership styles, and cross-cultural business interactions.",
+  },
+];
+
+const certificationsData = [
+  {
+    title: "AWS Certified Developer - Associate",
+    issuer: "Amazon Web Services (AWS)",
+    date: "Dec 2025",
+    url: "https://aws.amazon.com/",
+  },
+  {
+    title: "Spring Certified Professional",
+    issuer: "VMware",
+    date: "Oct 2025",
+    url: "https://spring.io/",
+  },
+  {
+    title: "Advanced Next.js Certification",
+    issuer: "Vercel / Next.js",
+    date: "Aug 2025",
+    url: "https://vercel.com/",
+  },
+];
+
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 bg-muted/30 relative">
+    <section id="experience" className="py-28 relative bg-[#08080a] overflow-hidden">
+      {/* Background Ambient Lighting */}
+      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-[#e50914]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-xs font-semibold text-accent uppercase tracking-widest mb-2 flex items-center justify-center gap-2">
-            <Briefcase className="h-4 w-4" /> Career Journey
-          </h2>
-          <p className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            Work Experience
-          </p>
-          <div className="h-1 w-12 bg-gradient-to-r from-primary to-accent mx-auto mt-4 rounded-full" />
+        {/* Section Header with Download CV button */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-[11px] font-mono tracking-[0.2em] uppercase text-white/80">
+              <Briefcase className="h-3.5 w-3.5 text-[#e50914]" />
+              CAREER &amp; ACADEMIC MILESTONES
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white uppercase">
+              EXPERIENCE &amp; <span className="text-[#e50914]">JOURNEY</span>
+            </h2>
+            <p className="text-sm sm:text-base text-white/60 max-w-xl font-sans leading-relaxed">
+              Demonstrated track record across cross-platform engineering, academic degrees, and industry credentials.
+            </p>
+          </div>
+
+          <a
+            href="/resume.pdf"
+            download
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white text-black font-extrabold text-xs uppercase tracking-wider hover:bg-[#e50914] hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(229,9,20,0.5)] cursor-pointer whitespace-nowrap self-start md:self-auto"
+          >
+            <FileDown className="h-4 w-4" />
+            <span>Download CV (PDF)</span>
+          </a>
         </div>
 
-        {/* Timeline Layout */}
-        <div className="relative max-w-3xl mx-auto">
-          {/* Vertical Center Line */}
-          <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2" />
+        {/* 1. Career Timeline */}
+        <div className="mb-20">
+          <div className="flex items-center gap-2 mb-8">
+            <Sparkles className="h-4 w-4 text-[#e50914]" />
+            <h3 className="text-base sm:text-lg font-bold text-white uppercase tracking-wider font-mono">
+              Work Experience
+            </h3>
+          </div>
 
-          {/* Timeline Nodes */}
-          <div className="space-y-12">
-            {experienceData.map((job, idx) => {
-              const isEven = idx % 2 === 0;
+          <div className="relative max-w-4xl mx-auto">
+            {/* Vertical Center/Left Line */}
+            <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-white/10 -translate-x-1/2" />
 
-              return (
+            <div className="space-y-12">
+              {experienceData.map((job, idx) => {
+                const isEven = idx % 2 === 0;
+
+                return (
+                  <div
+                    key={idx}
+                    className="relative flex flex-col sm:flex-row sm:justify-between items-start sm:items-center w-full"
+                  >
+                    {/* Timeline Node Dot */}
+                    <div className="absolute left-4 sm:left-1/2 w-8 h-8 rounded-full border border-white/20 bg-[#0a0a0f] flex items-center justify-center -translate-x-1/2 shadow-lg z-10">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#e50914] shadow-[0_0_10px_#e50914]" />
+                    </div>
+
+                    {/* Timeline Card */}
+                    <div
+                      className={`w-full sm:w-[calc(50%-2rem)] ml-12 sm:ml-0 ${
+                        isEven ? "sm:mr-auto" : "sm:ml-auto"
+                      }`}
+                    >
+                      <motion.div
+                        initial={{ opacity: 0, x: isEven ? -25 : 25 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: idx * 0.15 }}
+                        className="p-6 sm:p-7 rounded-3xl border border-white/10 bg-[#0a0a0f] hover:border-white/25 hover:shadow-2xl transition-all duration-300 space-y-3"
+                      >
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-[#e50914]/10 text-[#e50914] border border-[#e50914]/20">
+                          <Calendar className="h-3 w-3" />
+                          {job.duration}
+                        </span>
+
+                        <h4 className="text-lg font-bold text-white">
+                          {job.position}
+                        </h4>
+
+                        <div className="flex items-center gap-1.5 text-xs font-semibold text-white/50">
+                          <Building className="h-3.5 w-3.5 flex-shrink-0" />
+                          <span>{job.company}</span>
+                        </div>
+
+                        <p className="text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                          {job.description}
+                        </p>
+
+                        <div className="flex flex-wrap gap-1.5 pt-2">
+                          {job.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2.5 py-0.5 rounded-md text-[10px] font-mono bg-white/[0.04] text-white/80 border border-white/5"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </motion.div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Dual Degree Education & Industry Certifications */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 border-t border-white/10">
+          {/* Academic Pathway (7 Columns) */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="flex items-center gap-2">
+              <GraduationCap className="h-4 w-4 text-[#e50914]" />
+              <h3 className="text-base sm:text-lg font-bold text-white uppercase tracking-wider font-mono">
+                Academic Pathway
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {educationData.map((edu, idx) => (
                 <div
                   key={idx}
-                  className="relative flex flex-col sm:flex-row sm:justify-between items-start sm:items-center w-full"
+                  className="p-6 rounded-2xl border border-white/10 bg-[#0a0a0f] hover:border-white/20 transition-all duration-300 space-y-2 flex flex-col justify-between"
                 >
-                  {/* Timeline Dot Indicator */}
-                  <div className="absolute left-4 sm:left-1/2 w-8 h-8 rounded-full border border-border bg-background flex items-center justify-center -translate-x-1/2 shadow-md z-10">
-                    <span className="w-2.5 h-2.5 rounded-full bg-primary" />
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono font-bold text-white/40 uppercase">
+                      {edu.duration}
+                    </span>
+                    <h4 className="text-sm sm:text-base font-bold text-white leading-snug">
+                      {edu.degree}
+                    </h4>
+                    <p className="text-xs text-[#e50914] font-medium">
+                      {edu.institution}
+                    </p>
                   </div>
-
-                  {/* Card Container (Left for Even, Right for Odd on larger screens) */}
-                  <div
-                    className={`w-full sm:w-[calc(50%-2rem)] ml-12 sm:ml-0 ${
-                      isEven ? "sm:mr-auto" : "sm:ml-auto"
-                    }`}
-                  >
-                    <motion.div
-                      initial={{ opacity: 0, x: isEven ? -30 : 30, y: 15 }}
-                      whileInView={{ opacity: 1, x: 0, y: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.5, delay: idx * 0.15 }}
-                      className="p-6 rounded-2xl border border-border glass hover:shadow-lg hover:border-primary/20 transition-all duration-300"
-                    >
-                      {/* Meta Details */}
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-3">
-                        <Calendar className="h-3 w-3" />
-                        {job.duration}
-                      </span>
-
-                      <h3 className="text-lg font-bold text-foreground mb-1">
-                        {job.position}
-                      </h3>
-
-                      <div className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground mb-4">
-                        <Building className="h-4 w-4 flex-shrink-0" />
-                        <span>{job.company}</span>
-                      </div>
-
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                        {job.description}
-                      </p>
-
-                      {/* Technology Tags */}
-                      <div className="flex flex-wrap gap-1.5 pt-2 border-t border-border/40">
-                        {job.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-medium bg-secondary text-muted-foreground border border-border/20"
-                          >
-                            <Tag className="h-2.5 w-2.5 opacity-60" />
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </motion.div>
-                  </div>
+                  <p className="text-xs text-white/50 leading-relaxed font-sans pt-2 border-t border-white/5">
+                    {edu.details}
+                  </p>
                 </div>
-              );
-            })}
+              ))}
+            </div>
+          </div>
+
+          {/* Certifications (5 Columns) */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="flex items-center gap-2">
+              <Award className="h-4 w-4 text-[#e50914]" />
+              <h3 className="text-base sm:text-lg font-bold text-white uppercase tracking-wider font-mono">
+                Certifications &amp; Credentials
+              </h3>
+            </div>
+
+            <div className="space-y-3">
+              {certificationsData.map((cert, idx) => (
+                <a
+                  key={idx}
+                  href={cert.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-2xl border border-white/10 bg-[#0a0a0f] hover:border-white/25 hover:bg-white/[0.03] transition-all duration-300 flex items-center justify-between group cursor-pointer"
+                >
+                  <div className="space-y-0.5">
+                    <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-[#e50914] transition-colors">
+                      {cert.title}
+                    </h4>
+                    <p className="text-[11px] font-mono text-white/50">
+                      {cert.issuer} · {cert.date}
+                    </p>
+                  </div>
+                  <ArrowUpRight className="h-4 w-4 text-white/40 group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
