@@ -1,39 +1,44 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
+import About from "@/components/About";
 import Experience from "@/components/Experience";
-import Education from "@/components/Education";
-import Certifications from "@/components/Certifications";
-import Skills from "@/components/Skills";
-import GitHubStats from "@/components/GitHubStats";
-import Resume from "@/components/Resume";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollControls from "@/components/ScrollControls";
+import CustomCursor from "@/components/CustomCursor";
+import GSAPScrollTrigger from "@/components/GSAPScrollTrigger";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-background text-foreground antialiased selection:bg-primary/20">
+      {/* Subtle modern custom cursor on fine pointer devices */}
+      <CustomCursor />
+
+      {/* GSAP ScrollTrigger reveals for text and images */}
+      <GSAPScrollTrigger />
+
       {/* Scroll controls (Progress indicator & Scroll-to-Top button) */}
       <ScrollControls />
 
       {/* Sticky Navigation */}
       <Navbar />
 
-      {/* Single-Page Layout Sections */}
+      {/* Streamlined Single-Page Layout (5 High-Impact Sections) */}
       <main className="relative">
+        {/* 1. Full-screen Hero with Large Typography & CUTOUT Portrait */}
         <Hero />
-        <About />
-        <TechStack />
+
+        {/* 2. Flagship Projects Showcase with Performance Metrics */}
         <Projects />
+
+        {/* 3. Developer Story, Philosophy & Core Technical Capabilities */}
+        <About />
+
+        {/* 4. Career Journey, Dual Degrees, Certifications & CV Download */}
         <Experience />
-        <Education />
-        <Certifications />
-        <Skills />
-        <GitHubStats />
-        <Resume />
+
+        {/* 5. Contact Dispatch Form & Direct Inquiries */}
         <Contact />
       </main>
 
