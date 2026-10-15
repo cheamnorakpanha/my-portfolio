@@ -1,7 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Projects from "@/components/Projects";
 import About from "@/components/About";
+import Skills from "@/components/Skills";
+import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -24,21 +25,24 @@ export default function Home() {
       {/* Sticky Navigation */}
       <Navbar />
 
-      {/* Streamlined Single-Page Layout (5 High-Impact Sections) */}
+      {/* Streamlined Layout (Hero -> About -> Skills -> Projects -> Experience -> Contact) */}
       <main className="relative">
-        {/* 1. Full-screen Hero with Large Typography & CUTOUT Portrait */}
+        {/* Hero with Large Typography & CUTOUT Portrait */}
         <Hero />
 
-        {/* 2. Flagship Projects Showcase with Performance Metrics */}
-        <Projects />
-
-        {/* 3. Developer Story, Philosophy & Core Technical Capabilities */}
+        {/* 1. About */}
         <About />
 
-        {/* 4. Career Journey, Dual Degrees, Certifications & CV Download */}
+        {/* 2. Skills */}
+        <Skills />
+
+        {/* 3. Featured Projects */}
+        <Projects />
+
+        {/* 4. Experience */}
         <Experience />
 
-        {/* 5. Contact Dispatch Form & Direct Inquiries */}
+        {/* 5. Contact */}
         <Contact />
       </main>
 
