@@ -6,11 +6,11 @@ import { GithubIcon } from "./BrandIcons";
 import React, { useEffect, useState } from "react";
 
 export default function GitHubStats() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   const username = "cheamnorakpanha";
 

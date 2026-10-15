@@ -3,9 +3,13 @@
 import React, { useEffect, useState, useRef } from "react";
 
 export default function CustomCursor() {
-  const [mounted, setMounted] = useState(false);
+  const isFinePointer = React.useSyncExternalStore(
+    () => () => {},
+    () => typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches,
+    () => false
+  );
   const [isHovered, setIsHovered] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
+  const [, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   const dotRef = useRef<HTMLDivElement>(null);
@@ -15,11 +19,8 @@ export default function CustomCursor() {
   const isClickingRef = useRef(false);
 
   useEffect(() => {
-    // Only enable on desktop pointer devices
-    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
     if (!isFinePointer) return;
 
-    setMounted(true);
     document.body.classList.add("custom-cursor-enabled");
 
     let mouseX = -100;
@@ -107,9 +108,9 @@ export default function CustomCursor() {
       document.removeEventListener("mouseenter", onMouseEnter);
       cancelAnimationFrame(animId);
     };
-  }, []);
+  }, [isFinePointer]);
 
-  if (!mounted) return null;
+  if (!isFinePointer) return null;
 
   return (
     <div

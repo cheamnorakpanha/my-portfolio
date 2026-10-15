@@ -69,14 +69,14 @@ export default function Hero() {
         transition={{ duration: 0.7, delay: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
         className="absolute bottom-6 sm:bottom-10 lg:bottom-12 left-4 sm:left-8 lg:left-14 z-20 w-[calc(100%-2rem)] sm:w-auto max-w-lg lg:max-w-xl pointer-events-auto"
       >
-        <div className="relative rounded-3xl p-5 sm:p-7 bg-[#07070a]/75 backdrop-blur-2xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.85)] space-y-3.5 sm:space-y-4 overflow-hidden group">
+        <div className="relative rounded-3xl p-5 sm:p-7 glass-panel space-y-3.5 sm:space-y-4 overflow-hidden group">
           {/* Subtle Top Border Highlight & Ambient Red Glow */}
-          <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
           <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#e50914]/25 rounded-full blur-3xl pointer-events-none transition-opacity group-hover:opacity-100 opacity-60" />
 
           {/* Telemetry Status Pill */}
           <div className="flex items-center gap-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-[10px] sm:text-[11px] font-mono tracking-[0.16em] uppercase text-white/80">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[10px] sm:text-[11px] font-mono tracking-[0.16em] uppercase text-white/90">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -121,7 +121,7 @@ export default function Hero() {
             {/* Secondary Action Button */}
             <button
               onClick={() => scrollToSection("contact")}
-              className="group/btn relative inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/20 hover:border-white/40 text-white font-bold text-xs sm:text-sm uppercase tracking-wider backdrop-blur-md transition-all duration-300 cursor-pointer"
+              className="group/btn relative inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl glass-pill hover:bg-white/[0.12] text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 cursor-pointer"
             >
               <Mail className="h-4 w-4 text-[#e50914] group-hover/btn:scale-110 transition-transform duration-300" />
               <span>Contact Me</span>
@@ -133,7 +133,7 @@ export default function Hero() {
                 href="https://github.com/cheamnorakpanha"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 sm:p-3 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/20 hover:border-white/40 text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center"
+                className="p-2.5 sm:p-3 rounded-xl glass-pill hover:bg-white/[0.12] text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center"
                 aria-label="GitHub Profile"
               >
                 <GithubIcon className="h-4 w-4" />
@@ -142,7 +142,7 @@ export default function Hero() {
                 href="https://linkedin.com/in/cheamnorakpanha"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 sm:p-3 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/20 hover:border-white/40 text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center"
+                className="p-2.5 sm:p-3 rounded-xl glass-pill hover:bg-white/[0.12] text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center"
                 aria-label="LinkedIn Profile"
               >
                 <LinkedinIcon className="h-4 w-4" />

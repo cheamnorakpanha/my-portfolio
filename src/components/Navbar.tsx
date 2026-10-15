@@ -68,8 +68,8 @@ export default function Navbar() {
       <div
         className={`pointer-events-auto w-full max-w-5xl rounded-full transition-all duration-300 ${
           isScrolled
-            ? "bg-[#07070a]/90 backdrop-blur-2xl border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.85)] py-2 px-4 sm:px-6"
-            : "bg-[#0a0a0f]/70 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)] py-2.5 px-4 sm:px-6"
+            ? "glass-nav py-2 px-4 sm:px-6 shadow-[0_16px_40px_rgba(0,0,0,0.85)]"
+            : "glass py-2.5 px-4 sm:px-6 shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
         }`}
       >
         <div className="flex items-center justify-between h-10 sm:h-11">
@@ -93,7 +93,7 @@ export default function Navbar() {
           </a>
 
           {/* Centered Navigation Capsule Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-white/[0.03] p-1 rounded-full border border-white/5">
+          <nav className="hidden md:flex items-center gap-1 glass-pill p-1 rounded-full">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -109,7 +109,7 @@ export default function Navbar() {
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="activeNavCapsule"
-                    className="absolute inset-0 rounded-full bg-white/10 border border-white/15 shadow-sm -z-10"
+                    className="absolute inset-0 rounded-full bg-white/10 border border-white/20 shadow-sm -z-10"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -131,7 +131,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 flex items-center justify-center text-white cursor-pointer transition-colors"
+              className="md:hidden w-8 h-8 rounded-full glass-pill flex items-center justify-center text-white cursor-pointer transition-colors"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? (
@@ -151,7 +151,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden mt-3 rounded-2xl bg-[#08080c]/95 backdrop-blur-2xl border border-white/15 p-4 space-y-1 shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
+              className="md:hidden mt-3 rounded-2xl glass-panel p-4 space-y-1 shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
             >
               {navItems.map((item) => (
                 <a

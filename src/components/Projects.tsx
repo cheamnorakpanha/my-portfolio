@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, FolderGit2, ExternalLink, Code, Sparkles, ArrowUpRight } from "lucide-react";
+import { Search, Code, Sparkles, ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "./BrandIcons";
 
 interface Project {
@@ -108,13 +108,14 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-28 relative bg-[#08080a] overflow-hidden">
-      {/* Background Ambient Lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#e50914]/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      {/* Background Ambient Lighting for Glass Refraction */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#e50914]/12 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute bottom-1/3 -right-20 w-[500px] h-[500px] bg-[#e50914]/10 rounded-full blur-[160px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-[11px] font-mono tracking-[0.2em] uppercase text-white/80 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[11px] font-mono tracking-[0.2em] uppercase text-white/90 mb-4">
             <Sparkles className="h-3.5 w-3.5 text-[#e50914]" />
             FEATURED ENGINEERING WORK
           </div>
@@ -128,7 +129,7 @@ export default function Projects() {
 
         {/* Search & Category Filter Controls */}
         <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-12 max-w-5xl mx-auto">
-          {/* Search Input */}
+          {/* Search Input with Specular Glass */}
           <div className="relative w-full md:max-w-md">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
             <input
@@ -136,19 +137,19 @@ export default function Projects() {
               placeholder="Search by title, tech stack, or architecture..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-full border border-white/10 bg-[#0d0e14] text-white text-xs sm:text-sm placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[#e50914] focus:border-transparent transition-all shadow-inner"
+              className="w-full pl-10 pr-4 py-2.5 rounded-full glass-input text-white text-xs sm:text-sm placeholder:text-white/40 focus:outline-none transition-all"
             />
           </div>
 
           {/* Category Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 justify-center w-full md:w-auto bg-white/[0.03] p-1 rounded-full border border-white/5">
+          <div className="flex flex-wrap items-center gap-1.5 justify-center w-full md:w-auto glass-pill p-1 rounded-full">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer ${
                   selectedCategory === cat
-                    ? "bg-[#e50914] text-white shadow-[0_0_15px_rgba(229,9,20,0.5)]"
+                    ? "bg-[#e50914] text-white shadow-[0_0_15px_rgba(229,9,20,0.5)] font-bold"
                     : "text-white/60 hover:text-white hover:bg-white/5"
                 }`}
               >
@@ -160,7 +161,7 @@ export default function Projects() {
 
         {/* Projects Grid */}
         {filteredProjects.length === 0 ? (
-          <div className="text-center py-20 rounded-3xl border border-white/10 bg-[#0d0e14]/50 max-w-2xl mx-auto">
+          <div className="text-center py-20 rounded-3xl glass-panel max-w-2xl mx-auto">
             <p className="text-white/60 text-base">
               No projects found matching &ldquo;{searchQuery}&rdquo;.
             </p>
@@ -169,7 +170,7 @@ export default function Projects() {
                 setSearchQuery("");
                 setSelectedCategory("All");
               }}
-              className="mt-4 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 hover:bg-white/20 text-white transition-colors"
+              className="mt-4 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider glass-pill text-white transition-colors cursor-pointer"
             >
               Reset Filters
             </button>
@@ -185,8 +186,11 @@ export default function Projects() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.35 }}
-                  className="rounded-3xl border border-white/10 overflow-hidden bg-[#0a0a0f] hover:border-white/25 hover:shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-300 flex flex-col group relative"
+                  className="rounded-3xl glass-panel-interactive overflow-hidden flex flex-col group relative"
                 >
+                  {/* Specular Edge Highlight */}
+                  <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent z-20 pointer-events-none" />
+
                   {/* Project Image Preview */}
                   <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-black/40">
                     <Image
@@ -198,14 +202,14 @@ export default function Projects() {
                     />
 
                     {/* Dark gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-black/50" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0d0e14] via-transparent to-black/60" />
 
                     {/* Top Telemetry Badges */}
                     <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                      <span className="font-mono text-xs font-bold text-white/90 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15">
-                        {project.number} // {project.category.toUpperCase()}
+                      <span className="font-mono text-xs font-bold text-white/90 px-3 py-1 rounded-full glass-pill">
+                        {`${project.number} // ${project.category.toUpperCase()}`}
                       </span>
-                      <span className="font-mono text-xs font-semibold text-emerald-400 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-emerald-500/30 flex items-center gap-1.5">
+                      <span className="font-mono text-xs font-semibold text-emerald-400 px-3 py-1 rounded-full glass-pill border-emerald-500/30 flex items-center gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         {project.metrics}
                       </span>
@@ -231,7 +235,7 @@ export default function Projects() {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium bg-white/[0.04] text-white/80 border border-white/10"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium glass-pill text-white/85"
                         >
                           <Code className="h-3 w-3 text-[#e50914]" />
                           {tech}
@@ -240,12 +244,12 @@ export default function Projects() {
                     </div>
 
                     {/* Action Links */}
-                    <div className="flex items-center gap-3 pt-3 border-t border-white/5">
+                    <div className="flex items-center gap-3 pt-3 border-t border-white/10">
                       <a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/[0.1] text-xs font-bold uppercase tracking-wider text-white transition-all duration-200 cursor-pointer flex-1"
+                        className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl glass-pill hover:bg-white/[0.12] text-xs font-bold uppercase tracking-wider text-white transition-all duration-200 cursor-pointer flex-1"
                       >
                         <GithubIcon className="h-4 w-4" />
                         <span>Source Code</span>
@@ -268,8 +272,9 @@ export default function Projects() {
         )}
 
         {/* GitHub Explore Repositories Banner */}
-        <div className="mt-16 p-8 rounded-3xl border border-white/10 bg-gradient-to-r from-white/[0.02] via-white/[0.05] to-white/[0.02] backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
-          <div className="space-y-1">
+        <div className="mt-16 p-8 rounded-3xl glass-panel flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left relative overflow-hidden group">
+          <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          <div className="space-y-1 relative z-10">
             <h4 className="text-lg sm:text-xl font-black uppercase text-white tracking-tight">
               Looking for More Repositories &amp; Experimental Prototypes?
             </h4>
@@ -281,7 +286,7 @@ export default function Projects() {
             href="https://github.com/cheamnorakpanha"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-extrabold text-xs uppercase tracking-wider hover:bg-[#e50914] hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(229,9,20,0.5)] cursor-pointer whitespace-nowrap"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-extrabold text-xs uppercase tracking-wider hover:bg-[#e50914] hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(229,9,20,0.5)] cursor-pointer whitespace-nowrap relative z-10"
           >
             <GithubIcon className="h-4 w-4" />
             <span>Visit @cheamnorakpanha</span>

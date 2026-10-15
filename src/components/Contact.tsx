@@ -73,43 +73,51 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-muted/30 relative overflow-hidden">
+    <section id="contact" className="py-28 relative bg-[#07070a] overflow-hidden">
+      {/* Background Ambient Lighting for Glass Refraction */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#e50914]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
+      <div className="absolute bottom-10 right-1/4 w-[400px] h-[400px] bg-[#e50914]/8 rounded-full blur-[160px] pointer-events-none -z-10" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-xs font-semibold text-accent uppercase tracking-widest mb-2 flex items-center justify-center gap-2">
-            <Mail className="h-4 w-4" /> Connect
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[11px] font-mono tracking-[0.2em] uppercase text-white/90 mb-4">
+            <Mail className="h-3.5 w-3.5 text-[#e50914]" />
+            DISPATCH &amp; INQUIRIES
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white uppercase">
+            LET&apos;S ARCHITECT <span className="text-[#e50914]">TOGETHER</span>
           </h2>
-          <p className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            Get In Touch
+          <p className="text-sm sm:text-base text-white/60 mt-3 max-w-xl mx-auto font-sans leading-relaxed">
+            Whether you have a distributed system to engineer, a high-throughput API to build, or an exciting full-stack opportunity.
           </p>
-          <div className="h-1 w-12 bg-gradient-to-r from-primary to-accent mx-auto mt-4 rounded-full" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto items-stretch">
           {/* Info Details (Left) */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
-            <div className="space-y-6">
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground">
+            <div className="space-y-4">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
                 Let&apos;s build something great.
               </h3>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base text-white/70 leading-relaxed font-sans">
                 Whether you have a project idea, want to talk code, or inquire about open developer opportunities, feel free to drop a message. I usually respond within 24 hours.
               </p>
             </div>
 
             {/* Contact detail cards */}
-            <div className="space-y-4 py-4">
+            <div className="space-y-3.5 py-2">
               {contactInfo.map((info, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-4 p-4 rounded-xl border border-border glass shadow-sm"
+                  className="flex items-center gap-4 p-4 rounded-2xl glass-panel-interactive relative overflow-hidden"
                 >
-                  <div className="p-3 rounded-lg bg-secondary/50 flex-shrink-0">
+                  <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
+                  <div className="p-3 rounded-xl glass-pill flex-shrink-0 text-[#e50914]">
                     {info.icon}
                   </div>
                   <div className="min-w-0 flex-grow">
-                    <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wide">
+                    <p className="text-[10px] font-mono font-bold text-white/40 uppercase tracking-wider">
                       {info.label}
                     </p>
                     {info.href ? (
@@ -117,12 +125,12 @@ export default function Contact() {
                         href={info.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm font-semibold text-foreground hover:text-primary hover:underline transition-all block truncate"
+                        className="text-sm font-semibold text-white hover:text-[#e50914] transition-colors block truncate"
                       >
                         {info.value}
                       </a>
                     ) : (
-                      <p className="text-sm font-semibold text-foreground truncate">
+                      <p className="text-sm font-semibold text-white truncate">
                         {info.value}
                       </p>
                     )}
@@ -132,31 +140,34 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Custom vector map styling (Placeholder) */}
-            <div className="rounded-2xl border border-border glass h-44 overflow-hidden relative shadow-sm hidden sm:block bg-grid-pattern">
-              <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+            {/* Custom vector map styling */}
+            <div className="rounded-2xl glass-panel h-44 overflow-hidden relative hidden sm:block">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#07070a] via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4 z-10 flex items-center space-x-2">
-                <span className="flex h-3.5 w-3.5 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500"></span>
+                <span className="flex h-3 w-3 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e50914] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-[#e50914]"></span>
                 </span>
-                <span className="text-xs font-bold text-foreground">Phnom Penh, KH</span>
+                <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">Phnom Penh, Cambodia</span>
               </div>
             </div>
           </div>
 
           {/* Contact Form Container (Right) */}
           <div className="lg:col-span-7">
-            <div className="p-8 rounded-3xl border border-border glass shadow-xl h-full flex flex-col justify-center">
-              <h3 className="text-lg font-bold mb-6 text-foreground flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-accent" />
+            <div className="p-7 sm:p-9 rounded-3xl glass-panel relative overflow-hidden h-full flex flex-col justify-center">
+              {/* Specular Highlight */}
+              <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
+
+              <h3 className="text-lg sm:text-xl font-bold mb-6 text-white flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-[#e50914]" />
                 Send a Message
               </h3>
 
               <form onSubmit={handleFormSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                    <label className="text-xs font-mono font-bold text-white/60 uppercase tracking-wider">
                       Name
                     </label>
                     <input
@@ -166,11 +177,11 @@ export default function Contact() {
                       onChange={handleFormChange}
                       required
                       placeholder="John Doe"
-                      className="w-full px-4 py-2.5 rounded-xl border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
+                      className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-sm"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                    <label className="text-xs font-mono font-bold text-white/60 uppercase tracking-wider">
                       Email
                     </label>
                     <input
@@ -180,13 +191,13 @@ export default function Contact() {
                       onChange={handleFormChange}
                       required
                       placeholder="johndoe@example.com"
-                      className="w-full px-4 py-2.5 rounded-xl border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
+                      className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-sm"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                  <label className="text-xs font-mono font-bold text-white/60 uppercase tracking-wider">
                     Message
                   </label>
                   <textarea
@@ -195,15 +206,15 @@ export default function Contact() {
                     onChange={handleFormChange}
                     required
                     rows={5}
-                    placeholder="Hello, I would like to discuss..."
-                    className="w-full px-4 py-2.5 rounded-xl border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm resize-none"
+                    placeholder="Hello Norakpanha, I would like to discuss..."
+                    className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-sm resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting || submitSuccess}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/95 transition-all duration-300 disabled:opacity-50 cursor-pointer shadow-md shadow-primary/10"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-extrabold text-xs uppercase tracking-wider hover:bg-[#e50914] hover:text-white transition-all duration-300 disabled:opacity-50 cursor-pointer shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(229,9,20,0.6)]"
                 >
                   {isSubmitting ? (
                     <span>Sending...</span>
@@ -211,7 +222,7 @@ export default function Contact() {
                     <span>Message Sent!</span>
                   ) : (
                     <>
-                      <span>Send Message</span>
+                      <span>Send Dispatch</span>
                       <Send className="h-4 w-4" />
                     </>
                   )}
@@ -225,7 +236,7 @@ export default function Contact() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="mt-4 p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-xs font-semibold text-center flex items-center justify-center gap-2"
+                    className="mt-4 p-4 rounded-xl glass-panel border-emerald-500/30 text-emerald-400 text-xs font-semibold text-center flex items-center justify-center gap-2"
                   >
                     <Check className="h-4 w-4" />
                     Thank you! Your message was submitted successfully.

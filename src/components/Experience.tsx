@@ -81,14 +81,15 @@ const certificationsData = [
 export default function Experience() {
   return (
     <section id="experience" className="py-28 relative bg-[#08080a] overflow-hidden">
-      {/* Background Ambient Lighting */}
+      {/* Background Ambient Lighting for Glass Refraction */}
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-[#e50914]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
+      <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] bg-[#e50914]/8 rounded-full blur-[160px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Download CV button */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-[11px] font-mono tracking-[0.2em] uppercase text-white/80">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[11px] font-mono tracking-[0.2em] uppercase text-white/90">
               <Briefcase className="h-3.5 w-3.5 text-[#e50914]" />
               CAREER &amp; ACADEMIC MILESTONES
             </div>
@@ -133,7 +134,7 @@ export default function Experience() {
                     className="relative flex flex-col sm:flex-row sm:justify-between items-start sm:items-center w-full"
                   >
                     {/* Timeline Node Dot */}
-                    <div className="absolute left-4 sm:left-1/2 w-8 h-8 rounded-full border border-white/20 bg-[#0a0a0f] flex items-center justify-center -translate-x-1/2 shadow-lg z-10">
+                    <div className="absolute left-4 sm:left-1/2 w-8 h-8 rounded-full glass-pill flex items-center justify-center -translate-x-1/2 shadow-lg z-10">
                       <span className="w-2.5 h-2.5 rounded-full bg-[#e50914] shadow-[0_0_10px_#e50914]" />
                     </div>
 
@@ -148,9 +149,12 @@ export default function Experience() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: idx * 0.15 }}
-                        className="p-6 sm:p-7 rounded-3xl border border-white/10 bg-[#0a0a0f] hover:border-white/25 hover:shadow-2xl transition-all duration-300 space-y-3"
+                        className="p-6 sm:p-7 rounded-3xl glass-panel-interactive space-y-3 relative overflow-hidden"
                       >
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-[#e50914]/10 text-[#e50914] border border-[#e50914]/20">
+                        {/* Specular Highlight */}
+                        <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-bold glass-pill text-[#e50914] border-[#e50914]/30">
                           <Calendar className="h-3 w-3" />
                           {job.duration}
                         </span>
@@ -159,12 +163,12 @@ export default function Experience() {
                           {job.position}
                         </h4>
 
-                        <div className="flex items-center gap-1.5 text-xs font-semibold text-white/50">
+                        <div className="flex items-center gap-1.5 text-xs font-semibold text-white/60">
                           <Building className="h-3.5 w-3.5 flex-shrink-0" />
                           <span>{job.company}</span>
                         </div>
 
-                        <p className="text-xs sm:text-sm text-white/60 leading-relaxed font-sans">
+                        <p className="text-xs sm:text-sm text-white/65 leading-relaxed font-sans">
                           {job.description}
                         </p>
 
@@ -172,7 +176,7 @@ export default function Experience() {
                           {job.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-2.5 py-0.5 rounded-md text-[10px] font-mono bg-white/[0.04] text-white/80 border border-white/5"
+                              className="px-2.5 py-0.5 rounded-md text-[10px] font-mono glass-pill text-white/80"
                             >
                               {tag}
                             </span>
@@ -202,8 +206,9 @@ export default function Experience() {
               {educationData.map((edu, idx) => (
                 <div
                   key={idx}
-                  className="p-6 rounded-2xl border border-white/10 bg-[#0a0a0f] hover:border-white/20 transition-all duration-300 space-y-2 flex flex-col justify-between"
+                  className="p-6 rounded-2xl glass-panel-interactive space-y-2 flex flex-col justify-between relative overflow-hidden"
                 >
+                  <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
                   <div className="space-y-1">
                     <span className="text-[10px] font-mono font-bold text-white/40 uppercase">
                       {edu.duration}
@@ -215,7 +220,7 @@ export default function Experience() {
                       {edu.institution}
                     </p>
                   </div>
-                  <p className="text-xs text-white/50 leading-relaxed font-sans pt-2 border-t border-white/5">
+                  <p className="text-xs text-white/60 leading-relaxed font-sans pt-2 border-t border-white/10">
                     {edu.details}
                   </p>
                 </div>
@@ -239,8 +244,9 @@ export default function Experience() {
                   href={cert.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-4 rounded-2xl border border-white/10 bg-[#0a0a0f] hover:border-white/25 hover:bg-white/[0.03] transition-all duration-300 flex items-center justify-between group cursor-pointer"
+                  className="p-4 rounded-2xl glass-panel-interactive flex items-center justify-between group cursor-pointer relative overflow-hidden"
                 >
+                  <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
                   <div className="space-y-0.5">
                     <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-[#e50914] transition-colors">
                       {cert.title}
