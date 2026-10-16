@@ -6,6 +6,13 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./BrandIcons";
 
+const MARQUEE_NAMES = [
+  "CHEAM NORAKPANHA",
+  "CHEAM NORAKPANHA",
+  "CHEAM NORAKPANHA",
+  "CHEAM NORAKPANHA",
+];
+
 export default function Hero() {
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -24,24 +31,31 @@ export default function Hero() {
           animate={{ x: ["0%", "-50%"] }}
           transition={{
             ease: "linear",
-            duration: 20,
+            duration: 28,
             repeat: Infinity,
           }}
         >
           {/* Primary track */}
           <div className="flex shrink-0 items-center">
-            <span className="font-[family-name:var(--font-anton)] text-[15vw] sm:text-[17vw] lg:text-[19vw] font-normal tracking-[-0.01em] uppercase text-[#e50914] leading-none whitespace-nowrap opacity-95 scale-y-[1.08] sm:scale-y-[1.12] origin-center drop-shadow-[0_10px_40px_rgba(229,9,20,0.35)]">
-              CHEAM NORAKPANHA&nbsp;&nbsp;CHEAM NORAKPANHA&nbsp;&nbsp;CHEAM
-              NORAKPANHA&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
+            {MARQUEE_NAMES.map((name, index) => (
+              <span
+                key={`primary-${index}`}
+                className="font-[family-name:var(--font-anton)] text-[15vw] sm:text-[17vw] lg:text-[19vw] font-normal tracking-[-0.01em] uppercase text-[#e50914] leading-none whitespace-nowrap opacity-95 scale-y-[1.08] sm:scale-y-[1.12] origin-center drop-shadow-[0_10px_40px_rgba(229,9,20,0.35)] px-6 sm:px-10 lg:px-14"
+              >
+                {name}
+              </span>
+            ))}
           </div>
           {/* Secondary duplicate track for seamless infinite cycle */}
           <div className="flex shrink-0 items-center" aria-hidden="true">
-            <span className="font-[family-name:var(--font-anton)] text-[15vw] sm:text-[17vw] lg:text-[19vw] font-normal tracking-[-0.01em] uppercase text-[#e50914] leading-none whitespace-nowrap opacity-95 scale-y-[1.08] sm:scale-y-[1.12] origin-center drop-shadow-[0_10px_40px_rgba(229,9,20,0.35)]">
-              CHEAM NORAKPANHA&nbsp;&nbsp;&nbsp;&nbsp;CHEAM
-              NORAKPANHA&nbsp;&nbsp;&nbsp;&nbsp;CHEAM
-              NORAKPANHA&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
+            {MARQUEE_NAMES.map((name, index) => (
+              <span
+                key={`secondary-${index}`}
+                className="font-[family-name:var(--font-anton)] text-[15vw] sm:text-[17vw] lg:text-[19vw] font-normal tracking-[-0.01em] uppercase text-[#e50914] leading-none whitespace-nowrap opacity-95 scale-y-[1.08] sm:scale-y-[1.12] origin-center drop-shadow-[0_10px_40px_rgba(229,9,20,0.35)] px-6 sm:px-10 lg:px-14"
+              >
+                {name}
+              </span>
+            ))}
           </div>
         </motion.div>
       </div>
@@ -66,7 +80,11 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
+        transition={{
+          duration: 0.7,
+          delay: 0.25,
+          ease: [0.21, 0.47, 0.32, 0.98],
+        }}
         className="absolute bottom-6 sm:bottom-10 lg:bottom-12 left-4 sm:left-8 lg:left-14 z-20 w-[calc(100%-2rem)] sm:w-auto max-w-lg lg:max-w-xl pointer-events-auto"
       >
         <div className="relative rounded-3xl p-5 sm:p-7 glass-panel space-y-3.5 sm:space-y-4 overflow-hidden group">
@@ -103,7 +121,8 @@ export default function Hero() {
             </div>
 
             <p className="text-xs sm:text-sm text-white/60 leading-relaxed font-sans pt-0.5 max-w-sm sm:max-w-md">
-              Turning ideas into high-concurrency scalable solutions, cloud architectures, and crafted digital experiences.
+              Turning ideas into high-concurrency scalable solutions, cloud
+              architectures, and crafted digital experiences.
             </p>
           </div>
 
