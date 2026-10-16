@@ -3,69 +3,13 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BarChart3, Star, Cpu } from "lucide-react";
+import { portfolioData, SkillCategory, FeaturedSkill } from "@/data/portfolio";
 
-interface SkillItem {
-  name: string;
-  level: number; // percentage out of 100
-}
-
-interface SkillCategory {
-  title: string;
-  skills: SkillItem[];
-}
-
-const skillsData: SkillCategory[] = [
-  {
-    title: "Programming",
-    skills: [
-      { name: "Java", level: 90 },
-      { name: "TypeScript", level: 85 },
-      { name: "JavaScript", level: 90 },
-      { name: "Dart", level: 75 },
-      { name: "SQL", level: 80 },
-    ],
-  },
-  {
-    title: "Frameworks & Backend",
-    skills: [
-      { name: "Spring Boot", level: 88 },
-      { name: "React", level: 92 },
-      { name: "Next.js", level: 85 },
-      { name: "Flutter", level: 70 },
-      { name: "Node.js", level: 75 },
-    ],
-  },
-  {
-    title: "Databases & Cloud",
-    skills: [
-      { name: "PostgreSQL", level: 80 },
-      { name: "MySQL", level: 85 },
-      { name: "AWS S3 / EC2", level: 70 },
-      { name: "Docker", level: 75 },
-      { name: "REST APIs", level: 90 },
-    ],
-  },
-  {
-    title: "Soft Skills & Tools",
-    skills: [
-      { name: "Git & GitHub", level: 90 },
-      { name: "Postman", level: 88 },
-      { name: "Figma", level: 75 },
-      { name: "Problem Solving", level: 92 },
-      { name: "Team Collaboration", level: 88 },
-    ],
-  },
-];
+const skillsData = portfolioData.skills.categories;
+const featuredSkills = portfolioData.skills.featured;
 
 export default function Skills() {
   const [activeCategory, setActiveCategory] = useState(0);
-
-  // Top highlight skills for circular indicators
-  const featuredSkills = [
-    { name: "React / Next.js", level: 90, color: "text-[#61DAFB]", strokeColor: "#61DAFB" },
-    { name: "Spring Boot", level: 88, color: "text-[#6DB33F]", strokeColor: "#6DB33F" },
-    { name: "TypeScript", level: 85, color: "text-[#3178C6]", strokeColor: "#3178C6" },
-  ];
 
   return (
     <section id="skills" className="py-28 relative bg-[#08080a] overflow-hidden">

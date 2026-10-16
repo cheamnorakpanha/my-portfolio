@@ -2,12 +2,15 @@
 
 import { Mail, Globe } from "lucide-react";
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "./BrandIcons";
+import { portfolioData } from "@/data/portfolio";
 
 export default function Footer() {
+  const { personal } = portfolioData;
+
   const socialLinks = [
-    { name: "GitHub", url: "https://github.com/cheamnorakpanha", icon: <GithubIcon className="h-4 w-4" /> },
-    { name: "LinkedIn", url: "https://linkedin.com/in/cheamnorakpanha", icon: <LinkedinIcon className="h-4 w-4" /> },
-    { name: "Email", url: "mailto:cheam.panha168@gmail.com", icon: <Mail className="h-4 w-4" /> },
+    { name: "GitHub", url: personal.socials.github, icon: <GithubIcon className="h-4 w-4" /> },
+    { name: "LinkedIn", url: personal.socials.linkedin, icon: <LinkedinIcon className="h-4 w-4" /> },
+    { name: "Email", url: personal.socials.email, icon: <Mail className="h-4 w-4" /> },
     { name: "Twitter", url: "https://twitter.com/", icon: <TwitterIcon className="h-4 w-4" /> },
     { name: "Website", url: "#home", icon: <Globe className="h-4 w-4" /> },
   ];
@@ -19,10 +22,10 @@ export default function Footer() {
           {/* Logo & Info */}
           <div className="text-center md:text-left space-y-1.5">
             <h4 className="text-base font-extrabold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent uppercase tracking-wide">
-              Cheam Norakpanha
+              {personal.name}
             </h4>
             <p className="text-xs text-muted-foreground">
-              Full-Stack Software Engineer specializing in scalable application development.
+              {personal.fullRole} specializing in scalable application development.
             </p>
           </div>
 

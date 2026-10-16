@@ -5,15 +5,11 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./BrandIcons";
-
-const MARQUEE_NAMES = [
-  "CHEAM NORAKPANHA",
-  "CHEAM NORAKPANHA",
-  "CHEAM NORAKPANHA",
-  "CHEAM NORAKPANHA",
-];
+import { portfolioData } from "@/data/portfolio";
 
 export default function Hero() {
+  const { personal } = portfolioData;
+
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -37,7 +33,7 @@ export default function Hero() {
         >
           {/* Primary track */}
           <div className="flex shrink-0 items-center">
-            {MARQUEE_NAMES.map((name, index) => (
+            {personal.heroMarqueeNames.map((name, index) => (
               <span
                 key={`primary-${index}`}
                 className="font-[family-name:var(--font-anton)] text-[15vw] sm:text-[17vw] lg:text-[19vw] font-normal tracking-[-0.01em] uppercase text-[#e50914] leading-none whitespace-nowrap opacity-95 scale-y-[1.08] sm:scale-y-[1.12] origin-center drop-shadow-[0_10px_40px_rgba(229,9,20,0.35)] px-6 sm:px-10 lg:px-14"
@@ -48,7 +44,7 @@ export default function Hero() {
           </div>
           {/* Secondary duplicate track for seamless infinite cycle */}
           <div className="flex shrink-0 items-center" aria-hidden="true">
-            {MARQUEE_NAMES.map((name, index) => (
+            {personal.heroMarqueeNames.map((name, index) => (
               <span
                 key={`secondary-${index}`}
                 className="font-[family-name:var(--font-anton)] text-[15vw] sm:text-[17vw] lg:text-[19vw] font-normal tracking-[-0.01em] uppercase text-[#e50914] leading-none whitespace-nowrap opacity-95 scale-y-[1.08] sm:scale-y-[1.12] origin-center drop-shadow-[0_10px_40px_rgba(229,9,20,0.35)] px-6 sm:px-10 lg:px-14"
@@ -64,8 +60,8 @@ export default function Hero() {
       <div className="absolute inset-x-0 bottom-0 z-10 w-full flex items-end justify-center pointer-events-none">
         <div className="relative w-[88vw] max-w-[850px] lg:max-w-[960px] xl:max-w-[1080px] h-[85vh] sm:h-[89vh] md:h-[93vh] lg:h-[110vh] flex items-end justify-center">
           <Image
-            src="/norakpanha_no_bg.png"
-            alt="Cheam Norakpanha - Full-Stack Software Engineer"
+            src={personal.avatarImage}
+            alt={`${personal.name} - ${personal.fullRole}`}
             fill
             priority
             className="object-contain object-bottom drop-shadow-[0_20px_60px_rgba(0,0,0,0.95)]"
@@ -99,30 +95,29 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              AVAILABLE FOR ROLES &amp; ARCHITECTURE
+              {personal.statusPill}
             </div>
           </div>
 
           {/* High-Impact Editorial Role Title */}
           <div className="space-y-1">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tight text-white leading-[1.05]">
-              <span className="block text-white/90">FULL-STACK</span>
+              <span className="block text-white/90">{personal.rolePrimary}</span>
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/70">
-                SOFTWARE{" "}
+                {personal.roleSecondary}{" "}
                 <span className="text-[#e50914] drop-shadow-[0_0_30px_rgba(229,9,20,0.55)]">
-                  ENGINEER
+                  {personal.roleHighlight}
                 </span>
               </span>
             </h1>
 
             <div className="flex flex-wrap items-center gap-2 pt-1 text-xs sm:text-sm font-semibold uppercase tracking-wider font-mono text-white/80">
               <span className="text-[#e50914]">✦</span>
-              <span>SYSTEMS &amp; CLOUD ARCHITECT</span>
+              <span>{personal.subRole}</span>
             </div>
 
             <p className="text-xs sm:text-sm text-white/60 leading-relaxed font-sans pt-0.5 max-w-sm sm:max-w-md">
-              Turning ideas into high-concurrency scalable solutions, cloud
-              architectures, and crafted digital experiences.
+              {personal.bio}
             </p>
           </div>
 
@@ -149,7 +144,7 @@ export default function Hero() {
             {/* Quick Links */}
             <div className="flex items-center gap-2 pl-0 sm:pl-1">
               <a
-                href="https://github.com/cheamnorakpanha"
+                href={personal.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 sm:p-3 rounded-xl glass-pill hover:bg-white/[0.12] text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center"
@@ -158,7 +153,7 @@ export default function Hero() {
                 <GithubIcon className="h-4 w-4" />
               </a>
               <a
-                href="https://linkedin.com/in/cheamnorakpanha"
+                href={personal.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 sm:p-3 rounded-xl glass-pill hover:bg-white/[0.12] text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center"

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MapPin, Copy, Check, Send, Sparkles } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./BrandIcons";
+import { portfolioData } from "@/data/portfolio";
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -11,7 +12,8 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const emailAddress = "cheam.panha168@gmail.com";
+  const { personal } = portfolioData;
+  const emailAddress = personal.email;
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -57,18 +59,18 @@ export default function Contact() {
       icon: <LinkedinIcon className="h-5 w-5 text-accent" />,
       label: "LinkedIn Profile",
       value: "linkedin.com/in/cheamnorakpanha",
-      href: "https://linkedin.com/in/cheamnorakpanha",
+      href: personal.socials.linkedin,
     },
     {
       icon: <GithubIcon className="h-5 w-5 text-foreground" />,
       label: "GitHub Account",
       value: "github.com/cheamnorakpanha",
-      href: "https://github.com/cheamnorakpanha",
+      href: personal.socials.github,
     },
     {
       icon: <MapPin className="h-5 w-5 text-red-500" />,
       label: "Location",
-      value: "Phnom Penh, Cambodia",
+      value: personal.location,
     },
   ];
 

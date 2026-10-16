@@ -3,15 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { portfolioData } from "@/data/portfolio";
 
-const navItems = [
-  { name: "Home", id: "home" },
-  { name: "About", id: "about" },
-  { name: "Skills", id: "skills" },
-  { name: "Projects", id: "projects" },
-  { name: "Experience", id: "experience" },
-  { name: "Contact", id: "contact" },
-];
+const navItems = portfolioData.navigation;
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
