@@ -12,71 +12,11 @@ import {
   Sparkles,
   ArrowUpRight,
 } from "lucide-react";
+import { portfolioData, ExperienceItem as Job } from "@/data/portfolio";
 
-interface Job {
-  company: string;
-  position: string;
-  duration: string;
-  description: string;
-  tags: string[];
-}
-
-const experienceData: Job[] = [
-  {
-    company: "IT Center, Royal University of Phnom Penh",
-    position: "Flutter Developer (Intern)",
-    duration: "Jul 2025 – Oct 2025",
-    description:
-      "Collaborated on designing and developing cross-platform mobile application modules using Flutter. Conducted API integrations, widget optimizations, and interface tweaks matching strict UI/UX mockups, enhancing app responsiveness.",
-    tags: ["Flutter", "Dart", "Git", "REST APIs", "Mobile UI Design"],
-  },
-  {
-    company: "Institute of Foreign Languages (IFL)",
-    position: "Media & Website Coordinator (Freelance)",
-    duration: "Apr 2025 – Jun 2025",
-    description:
-      "Administered website updates, structured educational and event pages, and organized public media distribution pipelines. Collaborated closely with faculty heads to publish critical schedules under high-traffic events.",
-    tags: ["HTML", "CSS", "Web Coordination", "Content Systems", "Figma"],
-  },
-];
-
-const educationData = [
-  {
-    degree: "Bachelor of IT Engineering",
-    institution: "Royal University of Phnom Penh (RUPP)",
-    duration: "2021 – 2025",
-    details:
-      "Specialized in Software Engineering, database systems design, enterprise Java development (Spring Boot), web systems, and cloud computing environments.",
-  },
-  {
-    degree: "Bachelor of Professional Communication",
-    institution: "Institute of Foreign Languages (IFL)",
-    duration: "2021 – 2025",
-    details:
-      "Focused on professional writing, media coordination, organizational communications, leadership styles, and cross-cultural business interactions.",
-  },
-];
-
-const certificationsData = [
-  {
-    title: "AWS Certified Developer - Associate",
-    issuer: "Amazon Web Services (AWS)",
-    date: "Dec 2025",
-    url: "https://aws.amazon.com/",
-  },
-  {
-    title: "Spring Certified Professional",
-    issuer: "VMware",
-    date: "Oct 2025",
-    url: "https://spring.io/",
-  },
-  {
-    title: "Advanced Next.js Certification",
-    issuer: "Vercel / Next.js",
-    date: "Aug 2025",
-    url: "https://vercel.com/",
-  },
-];
+const experienceData = portfolioData.experience;
+const educationData = portfolioData.education;
+const certificationsData = portfolioData.certifications;
 
 export default function Experience() {
   return (

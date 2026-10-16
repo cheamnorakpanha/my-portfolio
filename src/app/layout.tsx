@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Anton } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { portfolioData } from "@/data/portfolio";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,12 +20,13 @@ const anton = Anton({
   variable: "--font-anton",
 });
 
+const { personal } = portfolioData;
+
 export const metadata: Metadata = {
-  title: "Cheam Norakpanha | Full-Stack Software Engineer",
-  description:
-    "Personal portfolio of Cheam Norakpanha, a Full-Stack Software Engineer specializing in React, Next.js, Spring Boot, and Cloud Applications. Building performant, clean, and scalable web solutions.",
+  title: `${personal.name} | ${personal.fullRole}`,
+  description: `Personal portfolio of ${personal.name}, a ${personal.fullRole} specializing in React, Next.js, Spring Boot, and Cloud Applications. Building performant, clean, and scalable web solutions.`,
   keywords: [
-    "Cheam Norakpanha",
+    personal.name,
     "Norakpanha",
     "Software Engineer",
     "Full-Stack Developer",
@@ -34,16 +36,15 @@ export const metadata: Metadata = {
     "Phnom Penh",
     "Cambodia",
   ],
-  authors: [{ name: "Cheam Norakpanha" }],
-  creator: "Cheam Norakpanha",
+  authors: [{ name: personal.name }],
+  creator: personal.name,
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://github.com/cheamnorakpanha",
-    title: "Cheam Norakpanha | Full-Stack Software Engineer",
-    description:
-      "Full-Stack Software Engineer specializing in React, Next.js, Spring Boot, and Cloud Applications.",
-    siteName: "Cheam Norakpanha Portfolio",
+    url: personal.socials.github,
+    title: `${personal.name} | ${personal.fullRole}`,
+    description: `${personal.fullRole} specializing in React, Next.js, Spring Boot, and Cloud Applications.`,
+    siteName: `${personal.name} Portfolio`,
   },
 };
 

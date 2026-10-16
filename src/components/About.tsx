@@ -19,6 +19,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { GithubIcon, FigmaIcon } from "./BrandIcons";
+import { portfolioData } from "@/data/portfolio";
 
 const techCategories = [
   {
@@ -64,21 +65,23 @@ const techCategories = [
 ];
 
 export default function About() {
+  const { about, personal } = portfolioData;
+
   const highlightCards = [
     {
       icon: <GraduationCap className="h-5 w-5 text-[#e50914]" />,
-      title: "Dual Degree",
-      description: "IT Engineering (RUPP) & Professional Communication (IFL).",
+      title: about.highlights[0].title,
+      description: about.highlights[0].description,
     },
     {
       icon: <Briefcase className="h-5 w-5 text-white" />,
-      title: "Production Focused",
-      description: "Mobile app developer internship & web coordination projects.",
+      title: about.highlights[1].title,
+      description: about.highlights[1].description,
     },
     {
       icon: <Code2 className="h-5 w-5 text-cyan-400" />,
-      title: "Engineering Values",
-      description: "Clean architecture, high concurrency, and sub-100ms API targets.",
+      title: about.highlights[2].title,
+      description: about.highlights[2].description,
     },
   ];
 
@@ -93,13 +96,13 @@ export default function About() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[11px] font-mono tracking-[0.2em] uppercase text-white/90 mb-4">
             <User className="h-3.5 w-3.5 text-[#e50914]" />
-            BACKGROUND &amp; CAPABILITIES
+            {about.badge}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white uppercase">
-            WHO I AM &amp; <span className="text-[#e50914]">HOW I BUILD</span>
+            {about.heading} <span className="text-[#e50914]">{about.headingHighlight}</span>
           </h2>
           <p className="text-sm sm:text-base text-white/60 mt-3 max-w-xl mx-auto font-sans leading-relaxed">
-            Bridging technical engineering with clear communication to architect resilient, scalable systems that solve real problems.
+            {about.description}
           </p>
         </div>
 
@@ -123,7 +126,7 @@ export default function About() {
                 <span className="h-3 w-3 rounded-full bg-amber-400 block" />
                 <span className="h-3 w-3 rounded-full bg-emerald-400 block" />
                 <span className="text-[11px] text-white/40 font-mono ml-4">
-                  norakpanha.config.ts
+                  {about.terminal.filename}
                 </span>
               </div>
               {/* Code Simulation */}
@@ -132,33 +135,33 @@ export default function About() {
                   <span className="text-white/40">const</span> engineerProfile = &#123;
                 </p>
                 <p className="pl-4">
-                  name: <span className="text-emerald-400">&apos;Cheam Norakpanha&apos;</span>,
+                  name: <span className="text-emerald-400">&apos;{personal.name}&apos;</span>,
                 </p>
                 <p className="pl-4">
-                  location: <span className="text-emerald-400">&apos;Phnom Penh, Cambodia&apos;</span>,
+                  location: <span className="text-emerald-400">&apos;{personal.location}&apos;</span>,
                 </p>
                 <p className="pl-4">
                   roles: [
                 </p>
                 <p className="pl-8 text-cyan-400">
-                  &apos;Full-Stack Software Engineer&apos;,
+                  &apos;{personal.fullRole}&apos;,
                 </p>
                 <p className="pl-8 text-cyan-400">
-                  &apos;Systems &amp; Cloud Architect&apos;
+                  &apos;{personal.subRole}&apos;
                 </p>
                 <p className="pl-4">],</p>
                 <p className="pl-4">
                   coreStack: [
                 </p>
                 <p className="pl-8 text-amber-300">
-                  &apos;React&apos;, &apos;Next.js&apos;, &apos;Spring Boot&apos;, &apos;PostgreSQL&apos;
+                  {about.terminal.coreStack.map((item) => `'${item}'`).join(", ")}
                 </p>
                 <p className="pl-4">],</p>
                 <p className="pl-4">
-                  philosophy: <span className="text-emerald-400">&apos;Scalable by design, simple in execution&apos;</span>,
+                  philosophy: <span className="text-emerald-400">&apos;{about.terminal.philosophy}&apos;</span>,
                 </p>
                 <p className="pl-4">
-                  openToWork: <span className="text-[#e50914] font-bold">true</span>
+                  openToWork: <span className="text-[#e50914] font-bold">{String(about.terminal.openToWork)}</span>
                 </p>
                 <p className="text-purple-400">&#125;;</p>
               </div>

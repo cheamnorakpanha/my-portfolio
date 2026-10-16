@@ -5,83 +5,9 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Code, Sparkles, ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "./BrandIcons";
+import { portfolioData, ProjectItem as Project } from "@/data/portfolio";
 
-interface Project {
-  id: number;
-  number: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  category: "Frontend" | "Backend" | "Fullstack" | "Mobile";
-  technologies: string[];
-  metrics: string;
-  githubUrl: string;
-  demoUrl: string;
-  imageUrl: string;
-}
-
-const projectsData: Project[] = [
-  {
-    id: 1,
-    number: "01",
-    title: "E-Commerce Cloud Architecture",
-    subtitle: "High-Throughput Microservices Platform",
-    description:
-      "Enterprise microservices infrastructure powered by Spring Cloud, PostgreSQL, and Next.js client with Redis caching and sub-100ms API response latency.",
-    category: "Fullstack",
-    technologies: ["Spring Boot", "React", "PostgreSQL", "Docker", "Redis"],
-    metrics: "99.8% Uptime SLA",
-    githubUrl: "https://github.com/cheamnorakpanha",
-    demoUrl: "https://github.com/cheamnorakpanha",
-    imageUrl:
-      "https://images.unsplash.com/photo-1557821552-17105176677c?w=1200&auto=format&fit=crop&q=80",
-  },
-  {
-    id: 2,
-    number: "02",
-    title: "AI Prompt Optimization Hub",
-    subtitle: "Realtime LLM Evaluation Platform",
-    description:
-      "Analytical software platform powered by OpenAI streaming APIs that simplifies prompts, evaluates version benchmarks, and visualizes token performance metrics in real-time.",
-    category: "Frontend",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "OpenAI API", "Framer Motion"],
-    metrics: "45ms Stream Latency",
-    githubUrl: "https://github.com/cheamnorakpanha",
-    demoUrl: "https://github.com/cheamnorakpanha",
-    imageUrl:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80",
-  },
-  {
-    id: 3,
-    number: "03",
-    title: "Event Booking Scheduler API",
-    subtitle: "High-Throughput Scheduling Server",
-    description:
-      "High-throughput secure scheduling server featuring token-based authentication, custom query caching pipelines, and automated email trigger workers.",
-    category: "Backend",
-    technologies: ["Spring Boot", "MySQL", "Postman", "Docker", "Git"],
-    metrics: "1.2M Request Benchmark",
-    githubUrl: "https://github.com/cheamnorakpanha",
-    demoUrl: "https://github.com/cheamnorakpanha",
-    imageUrl:
-      "https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8?w=1200&auto=format&fit=crop&q=80",
-  },
-  {
-    id: 4,
-    number: "04",
-    title: "Classroom Management Mobile App",
-    subtitle: "Offline-First Academic Coordination",
-    description:
-      "A Flutter application designed for local institutions to coordinate events, stream lecture handouts, and verify attendance through localized coordinates.",
-    category: "Mobile",
-    technologies: ["Flutter", "Dart", "MySQL", "Figma", "REST APIs"],
-    metrics: "Offline-First Sync",
-    githubUrl: "https://github.com/cheamnorakpanha",
-    demoUrl: "https://github.com/cheamnorakpanha",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&auto=format&fit=crop&q=80",
-  },
-];
+const projectsData = portfolioData.projects;
 
 export default function Projects() {
   const [searchQuery, setSearchQuery] = useState("");
