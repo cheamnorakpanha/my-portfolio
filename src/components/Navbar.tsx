@@ -81,7 +81,7 @@ export default function Navbar() {
               <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.2em] text-white group-hover:text-[#e50914] transition-colors leading-none">
                 NORAKPANHA
               </span>
-              <span className="text-[9px] font-mono tracking-widest text-white/40 uppercase leading-tight pt-0.5 hidden xs:block">
+              <span className="text-[9px] font-mono tracking-widest text-white/40 uppercase leading-tight pt-0.5 hidden xs:block whitespace-nowrap">
                 SOFTWARE ARCHITECT
               </span>
             </div>
@@ -113,7 +113,7 @@ export default function Navbar() {
           </nav>
 
           {/* Right Action: Editorial CTA & Mobile Menu Toggle */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "contact")}
@@ -126,7 +126,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-8 h-8 rounded-full glass-pill flex items-center justify-center text-white cursor-pointer transition-colors"
+              className="md:hidden w-10 h-10 rounded-full glass-pill flex items-center justify-center text-white cursor-pointer transition-colors"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? (
@@ -146,14 +146,14 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden mt-3 rounded-2xl glass-panel p-4 space-y-1 shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
+              className="md:hidden mt-3 rounded-2xl glass-panel p-4 space-y-1 max-h-[calc(100svh-6.5rem)] overflow-y-auto overscroll-contain shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
             >
               {navItems.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={(e) => handleNavClick(e, item.id)}
-                  className={`block px-3 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors ${
+                  className={`block px-3 py-3 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors ${
                     activeSection === item.id
                       ? "text-[#e50914] bg-white/5 font-bold"
                       : "text-white/70 hover:text-white hover:bg-white/[0.03]"

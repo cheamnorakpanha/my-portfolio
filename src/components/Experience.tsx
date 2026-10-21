@@ -20,14 +20,14 @@ const certificationsData = portfolioData.certifications;
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-28 relative bg-[#08080a] overflow-hidden">
+    <section id="experience" className="py-16 sm:py-24 lg:py-28 relative bg-[#08080a] overflow-hidden">
       {/* Background Ambient Lighting for Glass Refraction */}
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-[#e50914]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
       <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] bg-[#e50914]/8 rounded-full blur-[160px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Download CV button */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-16">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[11px] font-mono tracking-[0.2em] uppercase text-white/90">
               <Briefcase className="h-3.5 w-3.5 text-[#e50914]" />
@@ -44,7 +44,7 @@ export default function Experience() {
           <a
             href="/resume.pdf"
             download
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white text-black font-extrabold text-xs uppercase tracking-wider hover:bg-[#e50914] hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(229,9,20,0.5)] cursor-pointer whitespace-nowrap self-start md:self-auto"
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white text-black font-extrabold text-xs uppercase tracking-wider hover:bg-[#e50914] hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(229,9,20,0.5)] cursor-pointer whitespace-nowrap self-start md:self-auto max-w-full"
           >
             <FileDown className="h-4 w-4" />
             <span>Download CV (PDF)</span>
@@ -52,7 +52,7 @@ export default function Experience() {
         </div>
 
         {/* 1. Career Timeline */}
-        <div className="mb-20">
+        <div className="mb-14 sm:mb-20">
           <div className="flex items-center gap-2 mb-8">
             <Sparkles className="h-4 w-4 text-[#e50914]" />
             <h3 className="text-base sm:text-lg font-bold text-white uppercase tracking-wider font-mono">
@@ -62,26 +62,26 @@ export default function Experience() {
 
           <div className="relative max-w-4xl mx-auto">
             {/* Vertical Center/Left Line */}
-            <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-white/10 -translate-x-1/2" />
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-white/10 -translate-x-1/2" />
 
-            <div className="space-y-12">
+            <div className="space-y-8 sm:space-y-12">
               {experienceData.map((job, idx) => {
                 const isEven = idx % 2 === 0;
 
                 return (
                   <div
                     key={idx}
-                    className="relative flex flex-col sm:flex-row sm:justify-between items-start sm:items-center w-full"
+                    className="relative flex flex-col md:flex-row md:justify-between items-start md:items-center w-full"
                   >
                     {/* Timeline Node Dot */}
-                    <div className="absolute left-4 sm:left-1/2 w-8 h-8 rounded-full glass-pill flex items-center justify-center -translate-x-1/2 shadow-lg z-10">
+                    <div className="absolute left-4 md:left-1/2 w-8 h-8 rounded-full glass-pill flex items-center justify-center -translate-x-1/2 shadow-lg z-10">
                       <span className="w-2.5 h-2.5 rounded-full bg-[#e50914] shadow-[0_0_10px_#e50914]" />
                     </div>
 
                     {/* Timeline Card */}
                     <div
-                      className={`w-full sm:w-[calc(50%-2rem)] ml-12 sm:ml-0 ${
-                        isEven ? "sm:mr-auto" : "sm:ml-auto"
+                      className={`w-full md:w-[calc(50%-2rem)] ml-12 md:ml-0 ${
+                        isEven ? "md:mr-auto" : "md:ml-auto"
                       }`}
                     >
                       <motion.div
@@ -89,7 +89,7 @@ export default function Experience() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: idx * 0.15 }}
-                        className="p-6 sm:p-7 rounded-3xl glass-panel-interactive space-y-3 relative overflow-hidden"
+                        className="p-5 sm:p-7 rounded-3xl glass-panel-interactive space-y-3 relative overflow-hidden"
                       >
                         {/* Specular Highlight */}
                         <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
@@ -187,7 +187,7 @@ export default function Experience() {
                   className="p-4 rounded-2xl glass-panel-interactive flex items-center justify-between group cursor-pointer relative overflow-hidden"
                 >
                   <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
-                  <div className="space-y-0.5">
+                  <div className="space-y-0.5 min-w-0 pr-3">
                     <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-[#e50914] transition-colors">
                       {cert.title}
                     </h4>

@@ -86,14 +86,14 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-28 relative bg-[#07070a] overflow-hidden">
+    <section id="about" className="py-16 sm:py-24 lg:py-28 relative bg-[#07070a] overflow-hidden">
       {/* Background Ambient Glow for Glass Refraction */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#e50914]/10 rounded-full blur-[140px] pointer-events-none -z-10" />
       <div className="absolute top-1/4 right-0 w-[450px] h-[450px] bg-[#e50914]/8 rounded-full blur-[150px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[11px] font-mono tracking-[0.2em] uppercase text-white/90 mb-4">
             <User className="h-3.5 w-3.5 text-[#e50914]" />
             {about.badge}
@@ -107,7 +107,7 @@ export default function About() {
         </div>
 
         {/* Narrative & Developer Terminal Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-14 sm:mb-20">
           {/* Visual Code Window (Left) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -130,7 +130,7 @@ export default function About() {
                 </span>
               </div>
               {/* Code Simulation */}
-              <div className="p-6 font-mono text-xs sm:text-sm leading-relaxed text-white/70 overflow-x-auto space-y-1">
+              <div className="p-4 sm:p-6 font-mono text-[11px] sm:text-sm leading-relaxed text-white/70 overflow-x-auto space-y-1">
                 <p className="text-purple-400">
                   <span className="text-white/40">const</span> engineerProfile = &#123;
                 </p>
@@ -185,7 +185,7 @@ export default function About() {
             </p>
 
             <p className="text-white/70 text-sm sm:text-base leading-relaxed">
-              Holding a dual-degree background in **Information Technology Engineering** from the Royal University of Phnom Penh (RUPP) and **Professional Communication** from the Institute of Foreign Languages (IFL), I bring both technical rigor and the ability to articulate complex architecture clearly across engineering and business teams.
+              Holding a dual-degree background in <strong className="text-white font-semibold">Information Technology Engineering</strong> from the Royal University of Phnom Penh (RUPP) and <strong className="text-white font-semibold">Professional Communication</strong> from the Institute of Foreign Languages (IFL), I bring both technical rigor and the ability to articulate complex architecture clearly across engineering and business teams.
             </p>
 
             {/* Quick Strength Dials */}
@@ -217,7 +217,7 @@ export default function About() {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
             {techCategories.map((category, catIdx) => (
               <motion.div
                 key={category.title}
@@ -225,7 +225,7 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: catIdx * 0.1 }}
-                className="p-6 rounded-2xl glass-panel-interactive flex flex-col justify-between group relative overflow-hidden"
+                className="p-5 sm:p-6 rounded-2xl glass-panel-interactive flex flex-col justify-between group relative overflow-hidden"
               >
                 {/* Specular Highlight */}
                 <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
@@ -244,10 +244,10 @@ export default function About() {
                   {category.items.map((tech) => (
                     <div
                       key={tech.name}
-                      className="p-2.5 rounded-xl glass-pill hover:bg-white/[0.1] flex items-center gap-2 transition-all duration-200"
+                      className="p-2.5 rounded-xl glass-pill hover:bg-white/[0.1] flex items-center gap-2 min-w-0 transition-all duration-200"
                     >
                       {tech.icon}
-                      <span className="text-xs font-semibold text-white/90">
+                      <span className="text-xs font-semibold text-white/90 truncate">
                         {tech.name}
                       </span>
                     </div>

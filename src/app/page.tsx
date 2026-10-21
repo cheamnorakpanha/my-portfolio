@@ -12,7 +12,7 @@ import GSAPScrollTrigger from "@/components/GSAPScrollTrigger";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-background text-foreground antialiased selection:bg-primary/20">
+    <div className="relative min-h-svh bg-background text-foreground antialiased selection:bg-primary/20">
       {/* Subtle modern custom cursor on fine pointer devices */}
       <CustomCursor />
 

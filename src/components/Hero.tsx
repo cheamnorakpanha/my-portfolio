@@ -18,10 +18,10 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#070709] pt-16 select-none"
+      className="relative min-h-svh w-full flex flex-col justify-end lg:items-center lg:justify-center overflow-hidden bg-[#070709] pt-20 pb-5 px-4 sm:px-8 sm:pb-8 lg:p-0 lg:pt-16 select-none"
     >
       {/* 1. Giant Background Red Typographic Marquee (Behind Person) */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
+      <div className="absolute inset-x-0 top-16 h-[52svh] lg:inset-0 lg:h-auto flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         <motion.div
           className="flex whitespace-nowrap will-change-transform select-none"
           animate={{ x: ["0%", "-50%"] }}
@@ -57,15 +57,15 @@ export default function Hero() {
       </div>
 
       {/* 2. Foreground Portrait Layer (Layered Over Typography) */}
-      <div className="absolute inset-x-0 bottom-0 z-10 w-full flex items-end justify-center pointer-events-none">
-        <div className="relative w-[88vw] max-w-[850px] lg:max-w-[960px] xl:max-w-[1080px] h-[85vh] sm:h-[89vh] md:h-[93vh] lg:h-[110vh] flex items-end justify-center">
+      <div className="absolute inset-x-0 top-16 h-[52svh] lg:top-auto lg:bottom-0 lg:h-auto z-10 w-full flex items-end justify-center pointer-events-none">
+        <div className="relative w-full max-w-[560px] md:max-w-[680px] lg:w-[88vw] lg:max-w-[960px] xl:max-w-[1080px] h-full lg:h-[110vh] flex items-end justify-center">
           <Image
             src={personal.avatarImage}
             alt={`${personal.name} - ${personal.fullRole}`}
             fill
             priority
             className="object-contain object-bottom drop-shadow-[0_20px_60px_rgba(0,0,0,0.95)]"
-            sizes="(max-width: 1024px) 90vw, 1080px"
+            sizes="(max-width: 1024px) 100vw, 1080px"
           />
           {/* Subtle bottom fade gradient */}
           <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#070709] via-[#070709]/70 to-transparent" />
@@ -81,9 +81,9 @@ export default function Hero() {
           delay: 0.25,
           ease: [0.21, 0.47, 0.32, 0.98],
         }}
-        className="absolute bottom-6 sm:bottom-10 lg:bottom-12 left-4 sm:left-8 lg:left-14 z-20 w-[calc(100%-2rem)] sm:w-auto max-w-lg lg:max-w-xl pointer-events-auto"
+        className="relative mt-[36svh] sm:mt-[38svh] mx-auto lg:mx-0 lg:mt-0 lg:absolute lg:bottom-12 lg:left-14 z-20 w-full max-w-xl pointer-events-auto"
       >
-        <div className="relative rounded-3xl p-5 sm:p-7 glass-panel space-y-3.5 sm:space-y-4 overflow-hidden group">
+        <div className="relative rounded-3xl p-4 xs:p-5 sm:p-7 glass-panel space-y-3.5 sm:space-y-4 overflow-hidden group">
           {/* Subtle Top Border Highlight & Ambient Red Glow */}
           <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
           <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#e50914]/25 rounded-full blur-3xl pointer-events-none transition-opacity group-hover:opacity-100 opacity-60" />
@@ -101,7 +101,7 @@ export default function Hero() {
 
           {/* High-Impact Editorial Role Title */}
           <div className="space-y-1">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tight text-white leading-[1.05]">
+            <h1 className="text-[1.65rem] xs:text-3xl lg:text-4xl font-black uppercase tracking-tight text-white leading-[1.05]">
               <span className="block text-white/90">{personal.rolePrimary}</span>
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/70">
                 {personal.roleSecondary}{" "}
@@ -116,13 +116,13 @@ export default function Hero() {
               <span>{personal.subRole}</span>
             </div>
 
-            <p className="text-xs sm:text-sm text-white/60 leading-relaxed font-sans pt-0.5 max-w-sm sm:max-w-md">
+            <p className="text-xs sm:text-sm text-white/60 leading-relaxed font-sans pt-0.5 max-w-md">
               {personal.bio}
             </p>
           </div>
 
           {/* Redesigned Action Buttons & Socials */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
             {/* Primary Action Button */}
             <button
               onClick={() => scrollToSection("projects")}

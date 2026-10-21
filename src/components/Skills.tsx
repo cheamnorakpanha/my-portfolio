@@ -12,13 +12,13 @@ export default function Skills() {
   const [activeCategory, setActiveCategory] = useState(0);
 
   return (
-    <section id="skills" className="py-28 relative bg-[#08080a] overflow-hidden">
+    <section id="skills" className="py-16 sm:py-24 lg:py-28 relative bg-[#08080a] overflow-hidden">
       {/* Background Ambient Glow for Glass Refraction */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#e50914]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[11px] font-mono tracking-[0.2em] uppercase text-white/90 mb-4">
             <BarChart3 className="h-3.5 w-3.5 text-[#e50914]" />
             TECHNICAL EXPERTISE
@@ -32,7 +32,7 @@ export default function Skills() {
         </div>
 
         {/* Top Featured Skills (Circular SVG Indicators) */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto mb-10 sm:mb-16">
           {featuredSkills.map((skill, idx) => {
             const radius = 50;
             const circumference = 2 * Math.PI * radius;
@@ -89,17 +89,17 @@ export default function Skills() {
         </div>
 
         {/* Tabs & Bars Container */}
-        <div className="max-w-4xl mx-auto p-6 md:p-8 rounded-3xl glass-panel relative overflow-hidden">
+        <div className="max-w-4xl mx-auto p-4 xs:p-5 sm:p-6 md:p-8 rounded-3xl glass-panel relative overflow-hidden">
           {/* Specular Highlight */}
           <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
 
           {/* Category Tabs */}
-          <div className="flex flex-wrap gap-2 justify-center mb-10 pb-6 border-b border-white/10">
+          <div className="flex flex-wrap gap-2 justify-center mb-8 sm:mb-10 pb-5 sm:pb-6 border-b border-white/10">
             {skillsData.map((category, idx) => (
               <button
                 key={category.title}
                 onClick={() => setActiveCategory(idx)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all cursor-pointer ${
+                className={`px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all cursor-pointer ${
                   activeCategory === idx
                     ? "bg-[#e50914] text-white shadow-[0_0_15px_rgba(229,9,20,0.5)] font-bold"
                     : "glass-pill text-white/60 hover:text-white"
@@ -111,7 +111,7 @@ export default function Skills() {
           </div>
 
           {/* Animated Progress Bars */}
-          <div className="min-h-[220px]">
+          <div className="min-h-[200px] sm:min-h-[220px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeCategory}
@@ -123,7 +123,7 @@ export default function Skills() {
               >
                 {skillsData[activeCategory].skills.map((skill, idx) => (
                   <div key={skill.name} className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between gap-3 text-sm">
                       <span className="font-semibold text-white flex items-center gap-2">
                         <Cpu className="h-4 w-4 text-[#e50914] opacity-90" />
                         {skill.name}

@@ -75,14 +75,14 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-28 relative bg-[#07070a] overflow-hidden">
+    <section id="contact" className="py-16 sm:py-24 lg:py-28 relative bg-[#07070a] overflow-hidden">
       {/* Background Ambient Lighting for Glass Refraction */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#e50914]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
       <div className="absolute bottom-10 right-1/4 w-[400px] h-[400px] bg-[#e50914]/8 rounded-full blur-[160px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[11px] font-mono tracking-[0.2em] uppercase text-white/90 mb-4">
             <Mail className="h-3.5 w-3.5 text-[#e50914]" />
             DISPATCH &amp; INQUIRIES
@@ -95,7 +95,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 max-w-6xl mx-auto items-stretch">
           {/* Info Details (Left) */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
             <div className="space-y-4">
@@ -112,7 +112,7 @@ export default function Contact() {
               {contactInfo.map((info, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-4 p-4 rounded-2xl glass-panel-interactive relative overflow-hidden"
+                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl glass-panel-interactive relative overflow-hidden"
                 >
                   <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
                   <div className="p-3 rounded-xl glass-pill flex-shrink-0 text-[#e50914]">
@@ -157,7 +157,7 @@ export default function Contact() {
 
           {/* Contact Form Container (Right) */}
           <div className="lg:col-span-7">
-            <div className="p-7 sm:p-9 rounded-3xl glass-panel relative overflow-hidden h-full flex flex-col justify-center">
+            <div className="p-5 sm:p-9 rounded-3xl glass-panel relative overflow-hidden h-full flex flex-col justify-center">
               {/* Specular Highlight */}
               <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
 
@@ -179,7 +179,7 @@ export default function Contact() {
                       onChange={handleFormChange}
                       required
                       placeholder="John Doe"
-                      className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-sm"
+                      className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-base sm:text-sm"
                     />
                   </div>
                   <div className="space-y-2">
@@ -193,7 +193,7 @@ export default function Contact() {
                       onChange={handleFormChange}
                       required
                       placeholder="johndoe@example.com"
-                      className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-sm"
+                      className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-base sm:text-sm"
                     />
                   </div>
                 </div>
@@ -209,7 +209,7 @@ export default function Contact() {
                     required
                     rows={5}
                     placeholder="Hello Norakpanha, I would like to discuss..."
-                    className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-sm resize-none"
+                    className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-base sm:text-sm resize-none"
                   />
                 </div>
 

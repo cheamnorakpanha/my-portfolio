@@ -6,12 +6,12 @@ import { Home, FileQuestion } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-background px-4">
+    <div className="min-h-svh flex flex-col items-center justify-center relative overflow-hidden bg-background px-4">
       {/* Background glowing circles */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-primary/10 blur-[100px] -z-10 animate-pulse" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-accent/5 blur-[120px] -z-10 animate-pulse" style={{ animationDelay: "1s" }} />
 
-      <div className="max-w-md w-full text-center space-y-8 glass p-8 rounded-3xl border border-border shadow-2xl relative z-10">
+      <div className="max-w-md w-full text-center space-y-8 glass p-6 sm:p-8 rounded-3xl border border-border shadow-2xl relative z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -21,7 +21,7 @@ export default function NotFound() {
           <div className="p-4 bg-primary/10 rounded-full text-primary mb-6">
             <FileQuestion className="h-12 w-12 text-accent" />
           </div>
-          <h1 className="text-8xl font-black tracking-tighter bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h1 className="text-7xl sm:text-8xl font-black tracking-tighter bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             404
           </h1>
           <h2 className="text-2xl font-bold text-foreground mt-4">Page Not Found</h2>
