@@ -1,252 +1,160 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MapPin, Copy, Check, Send, Sparkles } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "./BrandIcons";
+import { ArrowUpRight, Check, Copy } from "lucide-react";
+import SectionHeader from "./SectionHeader";
+import Reveal from "./Reveal";
 import { portfolioData } from "@/data/portfolio";
 
 export default function Contact() {
+  const { personal, contact } = portfolioData;
   const [copied, setCopied] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const { personal } = portfolioData;
-  const emailAddress = personal.email;
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(emailAddress);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(personal.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = personal.socials.email;
+    }
   };
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  // Opens the visitor's mail app with the message pre-filled, so nothing is silently lost.
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
-
-    setIsSubmitting(true);
-    // Simulate API request
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setSubmitSuccess(false), 4500);
-    }, 1500);
+    const subject = `Portfolio inquiry from ${form.name}`;
+    const body = `${form.message}\n\n${form.name}\n${form.email}`;
+    window.location.href = `mailto:${personal.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
-  const contactInfo = [
-    {
-      icon: <Mail className="h-5 w-5 text-primary" />,
-      label: "Email Address",
-      value: emailAddress,
-      action: (
-        <button
-          onClick={handleCopyEmail}
-          className="ml-2 p-1.5 rounded-lg border border-border glass hover:bg-muted transition-all duration-200 cursor-pointer text-muted-foreground hover:text-foreground"
-          title="Copy Email"
-        >
-          {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
-        </button>
-      ),
-    },
-    {
-      icon: <LinkedinIcon className="h-5 w-5 text-accent" />,
-      label: "LinkedIn Profile",
-      value: "linkedin.com/in/cheamnorakpanha",
-      href: personal.socials.linkedin,
-    },
-    {
-      icon: <GithubIcon className="h-5 w-5 text-foreground" />,
-      label: "GitHub Account",
-      value: "github.com/cheamnorakpanha",
-      href: personal.socials.github,
-    },
-    {
-      icon: <MapPin className="h-5 w-5 text-red-500" />,
-      label: "Location",
-      value: personal.location,
-    },
+  const channels = [
+    { label: "LinkedIn", value: "in/cheamnorakpanha", href: personal.socials.linkedin },
+    { label: "GitHub", value: "@cheamnorakpanha", href: personal.socials.github },
+    { label: "Location", value: contact.location },
+    { label: "Status", value: contact.availability },
   ];
 
   return (
-    <section id="contact" className="py-28 relative bg-[#07070a] overflow-hidden">
-      {/* Background Ambient Lighting for Glass Refraction */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#e50914]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
-      <div className="absolute bottom-10 right-1/4 w-[400px] h-[400px] bg-[#e50914]/8 rounded-full blur-[160px] pointer-events-none -z-10" />
+    <section id="contact" className="grid-paper text-ink py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          index="05"
+          label="Contact"
+          title={contact.heading}
+          highlight={contact.headingHighlight}
+          aside={contact.description}
+        />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[11px] font-mono tracking-[0.2em] uppercase text-white/90 mb-4">
-            <Mail className="h-3.5 w-3.5 text-[#e50914]" />
-            DISPATCH &amp; INQUIRIES
+        {/* Email slab */}
+        <Reveal className="brut brut-shadow bg-signal text-white p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="min-w-0">
+            <p className="label">Write to</p>
+            <a
+              href={personal.socials.email}
+              className="display normal-case block mt-2 text-[clamp(1.75rem,6vw,4.5rem)] [overflow-wrap:anywhere] hover:underline decoration-[3px] underline-offset-8"
+            >
+              {personal.email}
+            </a>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white uppercase">
-            LET&apos;S ARCHITECT <span className="text-[#e50914]">TOGETHER</span>
-          </h2>
-          <p className="text-sm sm:text-base text-white/60 mt-3 max-w-xl mx-auto font-sans leading-relaxed">
-            Whether you have a distributed system to engineer, a high-throughput API to build, or an exciting full-stack opportunity.
-          </p>
-        </div>
+          <button type="button" onClick={copyEmail} className="brut-btn bg-white text-ink self-start lg:self-auto shrink-0">
+            {copied ? <Check className="h-4 w-4" strokeWidth={3} /> : <Copy className="h-4 w-4" strokeWidth={3} />}
+            <span aria-live="polite">{copied ? "Copied!" : "Copy email"}</span>
+          </button>
+        </Reveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto items-stretch">
-          {/* Info Details (Left) */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
-            <div className="space-y-4">
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
-                Let&apos;s build something great.
-              </h3>
-              <p className="text-sm sm:text-base text-white/70 leading-relaxed font-sans">
-                Whether you have a project idea, want to talk code, or inquire about open developer opportunities, feel free to drop a message. I usually respond within 24 hours.
-              </p>
-            </div>
-
-            {/* Contact detail cards */}
-            <div className="space-y-3.5 py-2">
-              {contactInfo.map((info, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center gap-4 p-4 rounded-2xl glass-panel-interactive relative overflow-hidden"
-                >
-                  <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
-                  <div className="p-3 rounded-xl glass-pill flex-shrink-0 text-[#e50914]">
-                    {info.icon}
-                  </div>
-                  <div className="min-w-0 flex-grow">
-                    <p className="text-[10px] font-mono font-bold text-white/40 uppercase tracking-wider">
-                      {info.label}
-                    </p>
-                    {info.href ? (
+        <div className="mt-8 grid gap-8 lg:grid-cols-12">
+          {/* Channels */}
+          <Reveal className="lg:col-span-5 brut brut-shadow bg-white self-start w-full">
+            <h3 className="label bg-ink text-paper px-4 py-3">Channels</h3>
+            <dl>
+              {channels.map((c) => (
+                <div key={c.label} className="grid grid-cols-3 border-t-[3px] border-ink">
+                  <dt className="label px-4 py-4 bg-paper border-r-[3px] border-ink">{c.label}</dt>
+                  <dd className="col-span-2 px-4 py-4 font-semibold">
+                    {c.href ? (
                       <a
-                        href={info.href}
+                        href={c.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm font-semibold text-white hover:text-[#e50914] transition-colors block truncate"
+                        className="underline decoration-2 underline-offset-4 hover:bg-signal hover:text-white"
                       >
-                        {info.value}
+                        {c.value}
                       </a>
                     ) : (
-                      <p className="text-sm font-semibold text-white truncate">
-                        {info.value}
-                      </p>
+                      c.value
                     )}
-                  </div>
-                  {info.action && info.action}
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
+          </Reveal>
 
-            {/* Custom vector map styling */}
-            <div className="rounded-2xl glass-panel h-44 overflow-hidden relative hidden sm:block">
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07070a] via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 z-10 flex items-center space-x-2">
-                <span className="flex h-3 w-3 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e50914] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-[#e50914]"></span>
-                </span>
-                <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">Phnom Penh, Cambodia</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form Container (Right) */}
-          <div className="lg:col-span-7">
-            <div className="p-7 sm:p-9 rounded-3xl glass-panel relative overflow-hidden h-full flex flex-col justify-center">
-              {/* Specular Highlight */}
-              <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
-
-              <h3 className="text-lg sm:text-xl font-bold mb-6 text-white flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-[#e50914]" />
-                Send a Message
-              </h3>
-
-              <form onSubmit={handleFormSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-xs font-mono font-bold text-white/60 uppercase tracking-wider">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleFormChange}
-                      required
-                      placeholder="John Doe"
-                      className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-sm"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-mono font-bold text-white/60 uppercase tracking-wider">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleFormChange}
-                      required
-                      placeholder="johndoe@example.com"
-                      className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs font-mono font-bold text-white/60 uppercase tracking-wider">
-                    Message
+          {/* Form */}
+          <Reveal delay={0.06} className="lg:col-span-7 brut brut-shadow bg-white">
+            <h3 className="label bg-ink text-paper px-4 py-3">New_message.txt</h3>
+            <form onSubmit={onSubmit} className="p-5 sm:p-6 space-y-5">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="contact-name" className="label block mb-2">
+                    Name
                   </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleFormChange}
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
                     required
-                    rows={5}
-                    placeholder="Hello Norakpanha, I would like to discuss..."
-                    className="w-full px-4 py-3 rounded-xl glass-input text-white focus:outline-none transition-all text-sm resize-none"
+                    value={form.name}
+                    onChange={onChange}
+                    placeholder="Your name"
+                    className="brut-field"
                   />
                 </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting || submitSuccess}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-extrabold text-xs uppercase tracking-wider hover:bg-[#e50914] hover:text-white transition-all duration-300 disabled:opacity-50 cursor-pointer shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(229,9,20,0.6)]"
-                >
-                  {isSubmitting ? (
-                    <span>Sending...</span>
-                  ) : submitSuccess ? (
-                    <span>Message Sent!</span>
-                  ) : (
-                    <>
-                      <span>Send Dispatch</span>
-                      <Send className="h-4 w-4" />
-                    </>
-                  )}
+                <div>
+                  <label htmlFor="contact-email" className="label block mb-2">
+                    Email
+                  </label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={form.email}
+                    onChange={onChange}
+                    placeholder="you@company.com"
+                    className="brut-field"
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="contact-message" className="label block mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  required
+                  rows={5}
+                  value={form.message}
+                  onChange={onChange}
+                  placeholder="Tell me about the project or role…"
+                  className="brut-field resize-none"
+                />
+              </div>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
+                <p className="text-sm text-muted-foreground">Opens your email app with the message ready to send.</p>
+                <button type="submit" className="brut-btn bg-signal text-white !px-7 !py-4">
+                  Send message <ArrowUpRight className="h-4 w-4" strokeWidth={3} />
                 </button>
-              </form>
-
-              {/* Feedback Alert Modal */}
-              <AnimatePresence>
-                {submitSuccess && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="mt-4 p-4 rounded-xl glass-panel border-emerald-500/30 text-emerald-400 text-xs font-semibold text-center flex items-center justify-center gap-2"
-                  >
-                    <Check className="h-4 w-4" />
-                    Thank you! Your message was submitted successfully.
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
+              </div>
+            </form>
+          </Reveal>
         </div>
       </div>
     </section>

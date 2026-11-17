@@ -1,262 +1,117 @@
-"use client";
-
 import React from "react";
-import { motion } from "framer-motion";
-import {
-  User,
-  Code2,
-  GraduationCap,
-  Briefcase,
-  Terminal,
-  Atom,
-  Wind,
-  Leaf,
-  Database,
-  Server,
-  GitBranch,
-  Send,
-  Layers,
-  Sparkles,
-} from "lucide-react";
-import { GithubIcon, FigmaIcon } from "./BrandIcons";
+import SectionHeader from "./SectionHeader";
+import Reveal from "./Reveal";
 import { portfolioData } from "@/data/portfolio";
 
-const techCategories = [
-  {
-    title: "Frontend Engineering",
-    description: "Responsive, type-safe, and interactive digital interfaces.",
-    items: [
-      { name: "React", icon: <Atom className="h-5 w-5 text-[#61DAFB]" /> },
-      { name: "Next.js", icon: <Terminal className="h-5 w-5 text-white" /> },
-      { name: "TypeScript", icon: <Code2 className="h-5 w-5 text-[#3178C6]" /> },
-      { name: "Tailwind CSS", icon: <Wind className="h-5 w-5 text-[#06B6D4]" /> },
-    ],
-  },
-  {
-    title: "Backend & Systems",
-    description: "Resilient microservices, REST APIs, and business architectures.",
-    items: [
-      { name: "Spring Boot", icon: <Leaf className="h-5 w-5 text-[#6DB33F]" /> },
-      { name: "Java", icon: <Server className="h-5 w-5 text-[#EA2D2E]" /> },
-      { name: "REST APIs", icon: <Send className="h-5 w-5 text-[#009688]" /> },
-      { name: "Microservices", icon: <Layers className="h-5 w-5 text-[#3b82f6]" /> },
-    ],
-  },
-  {
-    title: "Databases & Storage",
-    description: "Schema modeling, transactional consistency, and fast retrieval.",
-    items: [
-      { name: "PostgreSQL", icon: <Database className="h-5 w-5 text-[#4169E1]" /> },
-      { name: "MySQL", icon: <Server className="h-5 w-5 text-[#00758F]" /> },
-      { name: "Redis", icon: <Database className="h-5 w-5 text-[#DC382D]" /> },
-    ],
-  },
-  {
-    title: "DevOps & Tooling",
-    description: "Version control, container orchestration, and rapid delivery.",
-    items: [
-      { name: "Docker", icon: <Server className="h-5 w-5 text-[#2496ED]" /> },
-      { name: "Git", icon: <GitBranch className="h-5 w-5 text-[#F05032]" /> },
-      { name: "GitHub", icon: <GithubIcon className="h-5 w-5 text-white" /> },
-      { name: "Postman", icon: <Send className="h-5 w-5 text-[#FF6C37]" /> },
-      { name: "Figma", icon: <FigmaIcon className="h-5 w-5 text-[#F24E1E]" /> },
-    ],
-  },
+const toolkit = [
+  { title: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
+  { title: "Backend", items: ["Spring Boot", "Java", "REST APIs", "Microservices"] },
+  { title: "Data", items: ["PostgreSQL", "MySQL", "Redis"] },
+  { title: "DevOps & Tools", items: ["Docker", "Git", "GitHub", "Postman", "Figma"] },
 ];
 
 export default function About() {
-  const { about, personal } = portfolioData;
+  const { about, education, projects, experience, certifications } = portfolioData;
 
-  const highlightCards = [
-    {
-      icon: <GraduationCap className="h-5 w-5 text-[#e50914]" />,
-      title: about.highlights[0].title,
-      description: about.highlights[0].description,
-    },
-    {
-      icon: <Briefcase className="h-5 w-5 text-white" />,
-      title: about.highlights[1].title,
-      description: about.highlights[1].description,
-    },
-    {
-      icon: <Code2 className="h-5 w-5 text-cyan-400" />,
-      title: about.highlights[2].title,
-      description: about.highlights[2].description,
-    },
+  const facts = [
+    { value: education.length, label: "Degrees", tone: "bg-signal text-white" },
+    { value: projects.length, label: "Projects", tone: "bg-ink text-paper" },
+    { value: experience.length, label: "Roles", tone: "bg-white text-ink" },
+    { value: certifications.length, label: "Certs", tone: "bg-paper text-ink" },
   ];
 
   return (
-    <section id="about" className="py-28 relative bg-[#07070a] overflow-hidden">
-      {/* Background Ambient Glow for Glass Refraction */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#e50914]/10 rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute top-1/4 right-0 w-[450px] h-[450px] bg-[#e50914]/8 rounded-full blur-[150px] pointer-events-none -z-10" />
+    <section id="about" className="grid-paper text-ink py-20 sm:py-28 border-b-[3px] border-ink">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          index="01"
+          label="About"
+          title={about.heading}
+          highlight={about.headingHighlight}
+          aside={about.description}
+        />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[11px] font-mono tracking-[0.2em] uppercase text-white/90 mb-4">
-            <User className="h-3.5 w-3.5 text-[#e50914]" />
-            {about.badge}
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white uppercase">
-            {about.heading} <span className="text-[#e50914]">{about.headingHighlight}</span>
-          </h2>
-          <p className="text-sm sm:text-base text-white/60 mt-3 max-w-xl mx-auto font-sans leading-relaxed">
-            {about.description}
-          </p>
+        <div className="grid gap-6 lg:grid-cols-12">
+          {/* Lead */}
+          <Reveal className="lg:col-span-5 brut brut-shadow bg-ink text-paper p-6 sm:p-8 flex flex-col justify-between gap-10">
+            <p className="label text-signal">{"// Thesis"}</p>
+            <p className="display text-[2.5rem] xs:text-5xl sm:text-6xl leading-[0.95] [overflow-wrap:anywhere]">
+              Full-stack engineering, grounded in <span className="text-signal">clear communication.</span>
+            </p>
+          </Reveal>
+
+          {/* Narrative */}
+          <Reveal delay={0.06} className="lg:col-span-7 brut brut-shadow bg-white p-6 sm:p-8 space-y-5 text-base sm:text-lg leading-relaxed">
+            <p>
+              I specialize in designing and engineering high-throughput microservices, robust relational
+              databases, and modern interactive web experiences. Whether optimizing database latency in
+              PostgreSQL or crafting fluid interfaces in Next.js, my focus remains on performance, clean
+              structure, and end-user delight.
+            </p>
+            <p>
+              Holding a dual-degree background in{" "}
+              <mark className="bg-signal text-white px-1 font-semibold">Information Technology Engineering</mark>{" "}
+              from the Royal University of Phnom Penh (RUPP) and{" "}
+              <mark className="bg-ink text-paper px-1 font-semibold">Professional Communication</mark> from the
+              Institute of Foreign Languages (IFL), I bring both technical rigor and the ability to articulate
+              complex architecture clearly across engineering and business teams.
+            </p>
+          </Reveal>
         </div>
 
-        {/* Narrative & Developer Terminal Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-20">
-          {/* Visual Code Window (Left) */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 relative"
-          >
-            <div className="w-full rounded-3xl glass-panel overflow-hidden shadow-2xl relative">
-              {/* Specular Highlight */}
-              <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none" />
+        {/* Fact blocks */}
+        <dl className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {facts.map((fact, idx) => (
+            <Reveal
+              key={fact.label}
+              delay={idx * 0.05}
+              className={`brut brut-shadow p-5 flex flex-col-reverse ${fact.tone}`}
+            >
+              <dt className="label mt-2">{fact.label}</dt>
+              <dd className="display text-7xl sm:text-8xl">{String(fact.value).padStart(2, "0")}</dd>
+            </Reveal>
+          ))}
+        </dl>
 
-              {/* Window Bar */}
-              <div className="flex items-center space-x-2 bg-white/[0.04] px-4 py-3 border-b border-white/10 backdrop-blur-md">
-                <span className="h-3 w-3 rounded-full bg-[#e50914] block" />
-                <span className="h-3 w-3 rounded-full bg-amber-400 block" />
-                <span className="h-3 w-3 rounded-full bg-emerald-400 block" />
-                <span className="text-[11px] text-white/40 font-mono ml-4">
-                  {about.terminal.filename}
-                </span>
-              </div>
-              {/* Code Simulation */}
-              <div className="p-6 font-mono text-xs sm:text-sm leading-relaxed text-white/70 overflow-x-auto space-y-1">
-                <p className="text-purple-400">
-                  <span className="text-white/40">const</span> engineerProfile = &#123;
-                </p>
-                <p className="pl-4">
-                  name: <span className="text-emerald-400">&apos;{personal.name}&apos;</span>,
-                </p>
-                <p className="pl-4">
-                  location: <span className="text-emerald-400">&apos;{personal.location}&apos;</span>,
-                </p>
-                <p className="pl-4">
-                  roles: [
-                </p>
-                <p className="pl-8 text-cyan-400">
-                  &apos;{personal.fullRole}&apos;,
-                </p>
-                <p className="pl-8 text-cyan-400">
-                  &apos;{personal.subRole}&apos;
-                </p>
-                <p className="pl-4">],</p>
-                <p className="pl-4">
-                  coreStack: [
-                </p>
-                <p className="pl-8 text-amber-300">
-                  {about.terminal.coreStack.map((item) => `'${item}'`).join(", ")}
-                </p>
-                <p className="pl-4">],</p>
-                <p className="pl-4">
-                  philosophy: <span className="text-emerald-400">&apos;{about.terminal.philosophy}&apos;</span>,
-                </p>
-                <p className="pl-4">
-                  openToWork: <span className="text-[#e50914] font-bold">{String(about.terminal.openToWork)}</span>
-                </p>
-                <p className="text-purple-400">&#125;;</p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Description & Objective (Right) */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7 space-y-6"
-          >
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
-              Full-Stack Engineering Grounded in Communication
-            </h3>
-
-            <p className="text-white/70 text-sm sm:text-base leading-relaxed">
-              I specialize in designing and engineering high-throughput microservices, robust relational databases, and modern interactive web experiences. Whether optimizing database latency in PostgreSQL or crafting fluid interfaces in Next.js, my focus remains on performance, clean structure, and end-user delight.
-            </p>
-
-            <p className="text-white/70 text-sm sm:text-base leading-relaxed">
-              Holding a dual-degree background in **Information Technology Engineering** from the Royal University of Phnom Penh (RUPP) and **Professional Communication** from the Institute of Foreign Languages (IFL), I bring both technical rigor and the ability to articulate complex architecture clearly across engineering and business teams.
-            </p>
-
-            {/* Quick Strength Dials */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-              {highlightCards.map((card, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 rounded-2xl glass-panel-interactive space-y-2"
-                >
-                  <div className="p-2 rounded-xl glass-pill w-fit">
-                    {card.icon}
-                  </div>
-                  <h4 className="font-bold text-sm text-white">{card.title}</h4>
-                  <p className="text-xs text-white/50 leading-relaxed font-sans">
-                    {card.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+        {/* Principles */}
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
+          {about.highlights.map((item, idx) => (
+            <Reveal key={item.title} delay={idx * 0.06} className="relative brut brut-shadow bg-white p-6 pt-10">
+              <span className="absolute -top-4 left-4 brut bg-signal text-white display text-2xl px-2 pt-1 rotate-[-4deg]">
+                {String(idx + 1).padStart(2, "0")}
+              </span>
+              <h3 className="display text-3xl">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+            </Reveal>
+          ))}
         </div>
 
-        {/* Technical Capabilities Matrix */}
-        <div className="pt-6 border-t border-white/10">
-          <div className="flex items-center gap-2 mb-8">
-            <Sparkles className="h-4 w-4 text-[#e50914]" />
-            <h3 className="text-lg font-bold text-white uppercase tracking-wider font-mono">
-              Core Technical Competencies
-            </h3>
+        {/* Toolkit table */}
+        <Reveal className="mt-16 brut brut-shadow bg-white">
+          <div className="flex items-center justify-between bg-ink text-paper px-4 py-3">
+            <h3 className="label">Toolkit.exe</h3>
+            <span className="label text-signal" aria-hidden="true">■ ■ ■</span>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {techCategories.map((category, catIdx) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: catIdx * 0.1 }}
-                className="p-6 rounded-2xl glass-panel-interactive flex flex-col justify-between group relative overflow-hidden"
+          <ul>
+            {toolkit.map((group) => (
+              <li
+                key={group.title}
+                className="grid sm:grid-cols-12 border-t-[3px] border-ink first:border-t-0"
               >
-                {/* Specular Highlight */}
-                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
-
-                <div>
-                  <h4 className="text-base font-bold text-white mb-1 group-hover:text-[#e50914] transition-colors">
-                    {category.title}
-                  </h4>
-                  <p className="text-xs text-white/50 mb-5 leading-relaxed">
-                    {category.description}
-                  </p>
-                </div>
-
-                {/* Items */}
-                <div className="grid grid-cols-2 gap-2">
-                  {category.items.map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="p-2.5 rounded-xl glass-pill hover:bg-white/[0.1] flex items-center gap-2 transition-all duration-200"
-                    >
-                      {tech.icon}
-                      <span className="text-xs font-semibold text-white/90">
-                        {tech.name}
-                      </span>
-                    </div>
+                <span className="sm:col-span-3 display text-2xl px-4 py-3 sm:border-r-[3px] border-ink bg-paper">
+                  {group.title}
+                </span>
+                <span className="sm:col-span-9 flex flex-wrap gap-2 px-4 py-3">
+                  {group.items.map((item) => (
+                    <span key={item} className="label border-2 border-ink px-2 py-1 hover:bg-signal hover:text-white transition-colors">
+                      {item}
+                    </span>
                   ))}
-                </div>
-              </motion.div>
+                </span>
+              </li>
             ))}
-          </div>
-        </div>
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

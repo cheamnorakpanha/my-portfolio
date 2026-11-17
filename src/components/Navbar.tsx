@@ -1,181 +1,131 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 
-const navItems = portfolioData.navigation;
+const navItems = portfolioData.navigation.filter((item) => item.id !== "home");
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-
-      const sections = navItems.map((item) => document.getElementById(item.id));
-      let currentSection = "home";
-
-      for (const section of sections) {
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= 160 && rect.bottom >= 160) {
-            currentSection = section.id;
-            break;
-          }
+      let current = "home";
+      for (const item of portfolioData.navigation) {
+        const el = document.getElementById(item.id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 120 && rect.bottom >= 120) {
+          current = item.id;
+          break;
         }
       }
-      setActiveSection(currentSection);
+      setActiveSection(current);
     };
-
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    id: string,
-  ) => {
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
+
+  const go = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const section = document.getElementById(id);
-    if (section) {
-      const offset = 80;
-      const elementPos = section.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: elementPos - offset,
-        behavior: "smooth",
-      });
-      setActiveSection(id);
-      setMobileMenuOpen(false);
-    }
+    setMenuOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <header
-      className={`fixed top-4 sm:top-5 inset-x-0 z-50 flex justify-center px-4 sm:px-6 pointer-events-none transition-all duration-300 ${
-        isScrolled ? "top-3 sm:top-4" : "top-4 sm:top-5"
-      }`}
-    >
-      <div
-        className={`pointer-events-auto w-full max-w-5xl rounded-full transition-all duration-300 ${
-          isScrolled
-            ? "glass-nav py-2 px-4 sm:px-6 shadow-[0_16px_40px_rgba(0,0,0,0.85)]"
-            : "glass py-2.5 px-4 sm:px-6 shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
-        }`}
-      >
-        <div className="flex items-center justify-between h-10 sm:h-11">
-          {/* Brand Monogram & Name on Left */}
-          <a
-            href="#home"
-            onClick={(e) => handleNavClick(e, "home")}
-            className="group flex items-center gap-2.5 cursor-pointer"
-          >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#e50914] to-[#990008] flex items-center justify-center font-black text-white text-xs tracking-wider shadow-[0_0_15px_rgba(229,9,20,0.45)] group-hover:scale-105 transition-transform">
-              NP
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.2em] text-white group-hover:text-[#e50914] transition-colors leading-none">
-                NORAKPANHA
-              </span>
-              <span className="text-[9px] font-mono tracking-widest text-white/40 uppercase leading-tight pt-0.5 hidden xs:block">
-                SOFTWARE ARCHITECT
-              </span>
-            </div>
-          </a>
+    <header className="fixed inset-x-0 top-0 z-50 bg-ink text-paper border-b-[3px] border-signal">
+      <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-stretch justify-between pl-4 sm:pl-6 lg:pl-8">
+        <a
+          href="#home"
+          onClick={(e) => go(e, "home")}
+          className="flex items-center gap-2 display text-xl sm:text-2xl tracking-wide hover:text-signal transition-colors"
+        >
+          <span className="bg-signal text-white px-1.5 leading-tight">NP</span>
+          Norakpanha
+        </a>
 
-          {/* Centered Navigation Capsule Links */}
-          <nav className="hidden md:flex items-center gap-1 glass-pill p-1 rounded-full">
-            {navItems.map((item) => (
+        <nav aria-label="Primary" className="hidden md:flex items-stretch">
+          {navItems.map((item, idx) => {
+            const active = activeSection === item.id;
+            return (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                onClick={(e) => handleNavClick(e, item.id)}
-                className={`relative px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors duration-200 cursor-pointer rounded-full ${
-                  activeSection === item.id
-                    ? "text-white font-bold"
-                    : "text-white/60 hover:text-white"
+                onClick={(e) => go(e, item.id)}
+                aria-current={active ? "true" : undefined}
+                className={`label flex items-center gap-1.5 px-4 border-l-[3px] border-paper/15 transition-colors ${
+                  active ? "bg-paper text-ink" : "hover:bg-signal hover:text-white"
                 }`}
               >
+                <span className={active ? "text-signal" : "opacity-50"}>{String(idx + 1).padStart(2, "0")}</span>
                 {item.name}
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeNavCapsule"
-                    className="absolute inset-0 rounded-full bg-white/10 border border-white/20 shadow-sm -z-10"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  />
-                )}
               </a>
-            ))}
-          </nav>
+            );
+          })}
+        </nav>
 
-          {/* Right Action: Editorial CTA & Mobile Menu Toggle */}
-          <div className="flex items-center gap-3">
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "contact")}
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest text-white bg-gradient-to-r from-[#e50914] to-[#b80710] hover:from-[#ff1a25] hover:to-[#e50914] border border-white/20 shadow-[0_0_20px_rgba(229,9,20,0.35)] hover:shadow-[0_0_28px_rgba(229,9,20,0.6)] transition-all duration-300 group cursor-pointer"
-            >
-              <span>LET&apos;S TALK</span>
-              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-8 h-8 rounded-full glass-pill flex items-center justify-center text-white cursor-pointer transition-colors"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? (
-                <X className="h-4 w-4" />
-              ) : (
-                <Menu className="h-4 w-4" />
-              )}
-            </button>
-          </div>
+        <div className="flex items-stretch">
+          <a
+            href="#contact"
+            onClick={(e) => go(e, "contact")}
+            className="hidden sm:flex items-center gap-1.5 bg-signal px-5 label text-white border-l-[3px] border-ink hover:bg-paper hover:text-ink transition-colors"
+          >
+            Hire me
+            <ArrowUpRight className="h-4 w-4" strokeWidth={3} />
+          </a>
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            className="md:hidden flex w-14 items-center justify-center border-l-[3px] border-paper/15 hover:bg-signal"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+          >
+            {menuOpen ? <X className="h-6 w-6" strokeWidth={3} /> : <Menu className="h-6 w-6" strokeWidth={3} />}
+          </button>
         </div>
+      </div>
 
-        {/* Mobile Drawer Capsule */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.98 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden mt-3 rounded-2xl glass-panel p-4 space-y-1 shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
-            >
-              {navItems.map((item) => (
+      {menuOpen && (
+        <nav
+          id="mobile-menu"
+          aria-label="Mobile"
+          className="md:hidden fixed inset-x-0 top-[59px] sm:top-[67px] bottom-0 grid-paper text-ink overflow-y-auto p-4"
+        >
+          <ul className="space-y-3">
+            {navItems.map((item, idx) => (
+              <li key={item.id}>
                 <a
-                  key={item.id}
                   href={`#${item.id}`}
-                  onClick={(e) => handleNavClick(e, item.id)}
-                  className={`block px-3 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors ${
-                    activeSection === item.id
-                      ? "text-[#e50914] bg-white/5 font-bold"
-                      : "text-white/70 hover:text-white hover:bg-white/[0.03]"
+                  onClick={(e) => go(e, item.id)}
+                  className={`flex items-center justify-between brut brut-shadow px-4 py-3 ${
+                    activeSection === item.id ? "bg-signal text-white" : "bg-white"
                   }`}
                 >
-                  {item.name}
+                  <span className="display text-4xl">{item.name}</span>
+                  <span className="label">[{String(idx + 1).padStart(2, "0")}]</span>
                 </a>
-              ))}
-              <div className="pt-2 border-t border-white/10">
-                <a
-                  href="#contact"
-                  onClick={(e) => handleNavClick(e, "contact")}
-                  className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-widest text-white bg-[#e50914] hover:bg-[#b80710] shadow-[0_0_15px_rgba(229,9,20,0.4)] transition-colors"
-                >
-                  <span>LET&apos;S TALK</span>
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+              </li>
+            ))}
+          </ul>
+          <a href={portfolioData.personal.socials.email} className="brut-btn bg-ink text-paper w-full mt-8">
+            {portfolioData.personal.email}
+          </a>
+        </nav>
+      )}
     </header>
   );
 }
