@@ -1,59 +1,57 @@
-"use client";
-
-import { Mail, Globe } from "lucide-react";
-import { GithubIcon, LinkedinIcon, TwitterIcon } from "./BrandIcons";
+import { ArrowUp } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 
 export default function Footer() {
   const { personal } = portfolioData;
+  const year = new Date().getFullYear();
 
-  const socialLinks = [
-    { name: "GitHub", url: personal.socials.github, icon: <GithubIcon className="h-4 w-4" /> },
-    { name: "LinkedIn", url: personal.socials.linkedin, icon: <LinkedinIcon className="h-4 w-4" /> },
-    { name: "Email", url: personal.socials.email, icon: <Mail className="h-4 w-4" /> },
-    { name: "Twitter", url: "https://twitter.com/", icon: <TwitterIcon className="h-4 w-4" /> },
-    { name: "Website", url: "#home", icon: <Globe className="h-4 w-4" /> },
+  const links = [
+    { name: "GitHub", href: personal.socials.github, external: true },
+    { name: "LinkedIn", href: personal.socials.linkedin, external: true },
+    { name: "Email", href: personal.socials.email, external: false },
+    { name: "Résumé", href: personal.resumeUrl, external: true },
   ];
 
   return (
-    <footer className="border-t border-border glass bg-background/50 py-12 relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          {/* Logo & Info */}
-          <div className="text-center md:text-left space-y-1.5">
-            <h4 className="text-base font-extrabold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent uppercase tracking-wide">
-              {personal.name}
-            </h4>
-            <p className="text-xs text-muted-foreground">
-              {personal.fullRole} specializing in scalable application development.
-            </p>
+    <footer className="bg-ink text-paper border-t-[3px] border-signal overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-14">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+          <div>
+            <p className="label text-signal">{personal.fullRole}</p>
+            <p className="mt-1 text-sm opacity-70">{personal.location}</p>
           </div>
-
-          {/* Social Links */}
-          <div className="flex items-center gap-3">
-            {socialLinks.map((link) => (
+          <nav aria-label="Footer" className="flex flex-wrap gap-3">
+            {links.map((link) => (
               <a
                 key={link.name}
-                href={link.url}
-                target={link.url.startsWith("http") ? "_blank" : undefined}
-                rel={link.url.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="p-2.5 rounded-full border border-border glass text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-105"
-                title={link.name}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+                className="label border-[3px] border-paper px-3 py-2 hover:bg-signal hover:border-signal transition-colors"
               >
-                {link.icon}
+                {link.name}
               </a>
             ))}
-          </div>
+            <a
+              href="#home"
+              className="label inline-flex items-center gap-1.5 bg-paper text-ink border-[3px] border-paper px-3 py-2 hover:bg-signal hover:text-white hover:border-signal transition-colors"
+            >
+              Top <ArrowUp className="h-3.5 w-3.5" strokeWidth={3} />
+            </a>
+          </nav>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-border/40 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-muted-foreground font-semibold">
-          <p>© 2026 Cheam Norakpanha. All Rights Reserved.</p>
-          <div className="flex items-center gap-4">
-            <a href="#about" className="hover:text-foreground transition-colors">About</a>
-            <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
-            <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
-          </div>
+        <p
+          aria-hidden="true"
+          className="display mt-12 text-[17.5vw] lg:text-[13.5rem] xl:text-[15.5rem] leading-[0.8] text-signal select-none whitespace-nowrap -mb-[0.06em]"
+        >
+          Norakpanha
+        </p>
+      </div>
+      <div className="border-t-[3px] border-paper/20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between gap-2 label opacity-70">
+          <p>© {year} {personal.name}</p>
+          <p>Built with Next.js</p>
         </div>
       </div>
     </footer>

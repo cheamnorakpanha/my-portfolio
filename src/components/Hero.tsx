@@ -1,170 +1,163 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./BrandIcons";
 import { portfolioData } from "@/data/portfolio";
 
 export default function Hero() {
   const { personal } = portfolioData;
-
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
+  const [firstName, ...rest] = personal.name.split(" ");
+  const lastName = rest.join(" ");
 
   return (
     <section
       id="home"
-      className="relative min-h-svh w-full flex flex-col justify-end lg:items-center lg:justify-center overflow-hidden bg-[#070709] pt-20 pb-5 px-4 sm:px-8 sm:pb-8 lg:p-0 lg:pt-16 select-none"
+      className="relative grid-paper text-ink min-h-svh pt-[59px] sm:pt-[67px] overflow-hidden"
     >
-      {/* 1. Giant Background Red Typographic Marquee (Behind Person) */}
-      <div className="absolute inset-x-0 top-16 h-[52svh] lg:inset-0 lg:h-auto flex items-center justify-center pointer-events-none z-0 overflow-hidden">
-        <motion.div
-          className="flex whitespace-nowrap will-change-transform select-none"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            ease: "linear",
-            duration: 28,
-            repeat: Infinity,
-          }}
-        >
-          {/* Primary track */}
-          <div className="flex shrink-0 items-center">
-            {personal.heroMarqueeNames.map((name, index) => (
-              <span
-                key={`primary-${index}`}
-                className="font-[family-name:var(--font-anton)] text-[15vw] sm:text-[17vw] lg:text-[19vw] font-normal tracking-[-0.01em] uppercase text-[#e50914] leading-none whitespace-nowrap opacity-95 scale-y-[1.08] sm:scale-y-[1.12] origin-center drop-shadow-[0_10px_40px_rgba(229,9,20,0.35)] px-6 sm:px-10 lg:px-14"
-              >
-                {name}
+      {/* Mobile order: name, portrait, details. Desktop: copy left, portrait right. */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-10 lg:min-h-[calc(100svh-67px)] grid gap-y-12 lg:gap-x-12 lg:gap-y-6 lg:grid-cols-12 lg:grid-rows-[1fr_auto_auto_1fr]">
+        {/* Status + name */}
+        <div className="order-1 lg:order-none lg:col-span-7 lg:row-start-2 flex flex-col">
+          {/* Status tag */}
+          <p className="flex w-fit items-stretch brut bg-ink text-paper">
+            <span className="flex items-center px-3 border-r-[3px] border-ink bg-paper" aria-hidden="true">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping bg-emerald-500 opacity-70 motion-reduce:animate-none" />
+                <span className="relative inline-flex h-2.5 w-2.5 bg-emerald-600 border border-ink" />
               </span>
-            ))}
-          </div>
-          {/* Secondary duplicate track for seamless infinite cycle */}
-          <div className="flex shrink-0 items-center" aria-hidden="true">
-            {personal.heroMarqueeNames.map((name, index) => (
-              <span
-                key={`secondary-${index}`}
-                className="font-[family-name:var(--font-anton)] text-[15vw] sm:text-[17vw] lg:text-[19vw] font-normal tracking-[-0.01em] uppercase text-[#e50914] leading-none whitespace-nowrap opacity-95 scale-y-[1.08] sm:scale-y-[1.12] origin-center drop-shadow-[0_10px_40px_rgba(229,9,20,0.35)] px-6 sm:px-10 lg:px-14"
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-      </div>
+            </span>
+            <span className="label px-3 py-2">{personal.statusPill}</span>
+          </p>
 
-      {/* 2. Foreground Portrait Layer (Layered Over Typography) */}
-      <div className="absolute inset-x-0 top-16 h-[52svh] lg:top-auto lg:bottom-0 lg:h-auto z-10 w-full flex items-end justify-center pointer-events-none">
-        <div className="relative w-full max-w-[560px] md:max-w-[680px] lg:w-[88vw] lg:max-w-[960px] xl:max-w-[1080px] h-full lg:h-[110vh] flex items-end justify-center">
-          <Image
-            src={personal.avatarImage}
-            alt={`${personal.name} - ${personal.fullRole}`}
-            fill
-            priority
-            className="object-contain object-bottom drop-shadow-[0_20px_60px_rgba(0,0,0,0.95)]"
-            sizes="(max-width: 1024px) 100vw, 1080px"
-          />
-          {/* Subtle bottom fade gradient */}
-          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#070709] via-[#070709]/70 to-transparent" />
+          {/* Name */}
+          <h1 className="mt-6 sm:mt-8">
+            <span className="sr-only">
+              {personal.name}, {personal.fullRole}
+            </span>
+            <span
+              aria-hidden="true"
+              className="display block text-[clamp(4.5rem,min(19vw,17svh),10.5rem)] leading-[0.85]"
+            >
+              {firstName}
+            </span>
+            <span
+              aria-hidden="true"
+              className="display mt-3 inline-block bg-signal text-white brut brut-shadow px-3 pt-3 pb-1 -rotate-1 text-[clamp(3.4rem,min(14.5vw,13svh),8.25rem)] leading-[0.85]"
+            >
+              {lastName}
+            </span>
+          </h1>
+        </div>
+
+        {/* Role, bio, actions */}
+        <div className="order-3 lg:order-none lg:col-span-7 lg:row-start-3 flex flex-col">
+          {/* Role strip */}
+          <div className="flex flex-wrap items-stretch gap-3">
+            <span className="display text-2xl sm:text-3xl bg-ink text-paper px-3 pt-1.5 pb-1">
+              {personal.rolePrimary} {personal.roleSecondary}{" "}
+              <span className="text-signal">{personal.roleHighlight}</span>
+            </span>
+            <span className="label flex items-center brut bg-white px-3 py-2">✶ {personal.subRole}</span>
+          </div>
+
+          {/* Bio */}
+          <p className="mt-6 max-w-xl brut brut-shadow bg-white p-4 sm:p-5 text-base sm:text-lg leading-relaxed">
+            {personal.bio}
+          </p>
+
+          {/* Actions */}
+          <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+            <a href="#projects" className="brut-btn bg-signal text-white !px-6 !py-4">
+              View projects <ArrowUpRight className="h-4 w-4" strokeWidth={3} />
+            </a>
+            <a href="#contact" className="brut-btn bg-white text-ink !px-6 !py-4">
+              <Mail className="h-4 w-4" strokeWidth={2.5} /> Contact me
+            </a>
+            <a
+              href={personal.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="brut-btn bg-ink text-paper !p-0 h-[52px] w-[52px]"
+              aria-label="GitHub profile (opens in new tab)"
+            >
+              <GithubIcon className="h-5 w-5" />
+            </a>
+            <a
+              href={personal.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="brut-btn bg-ink text-paper !p-0 h-[52px] w-[52px]"
+              aria-label="LinkedIn profile (opens in new tab)"
+            >
+              <LinkedinIcon className="h-5 w-5" />
+            </a>
+          </div>
+        </div>
+
+        {/* Portrait window */}
+        <div className="order-2 lg:order-none lg:col-start-8 lg:col-span-5 lg:row-start-1 lg:row-span-4 lg:self-center relative mx-auto lg:mr-0 w-full max-w-[400px] sm:max-w-[440px] lg:max-w-[min(100%,56svh)]">
+          <figure className="relative brut bg-signal brut-shadow rotate-1">
+            <figcaption className="flex items-center justify-between bg-ink text-paper px-3 py-2 border-b-[3px] border-ink">
+              <span className="label">{firstName.toLowerCase()}_{lastName.toLowerCase()}.png</span>
+              <span className="flex gap-1.5" aria-hidden="true">
+                <span className="h-3 w-3 border-2 border-paper" />
+                <span className="h-3 w-3 border-2 border-paper" />
+                <span className="h-3 w-3 bg-signal border-2 border-paper" />
+              </span>
+            </figcaption>
+
+            <div className="relative aspect-[4/5] overflow-hidden">
+              {/* Halftone-ish dot texture behind the cutout */}
+              <div
+                className="absolute inset-0 opacity-25"
+                style={{
+                  backgroundImage: "radial-gradient(#0a0a0a 1.4px, transparent 1.4px)",
+                  backgroundSize: "14px 14px",
+                }}
+                aria-hidden="true"
+              />
+              {/* Giant initials behind the portrait */}
+              <span
+                aria-hidden="true"
+                className="display absolute -left-2 top-2 text-[11rem] sm:text-[13rem] leading-none text-ink/90 select-none"
+              >
+                NP
+              </span>
+              <Image
+                src={personal.avatarImage}
+                alt={`Portrait of ${personal.name}`}
+                fill
+                loading="eager"
+                fetchPriority="high"
+                sizes="(max-width: 1024px) 460px, 520px"
+                className="object-contain object-bottom grayscale contrast-125"
+              />
+            </div>
+
+            <div className="flex items-center justify-between bg-white px-3 py-2 border-t-[3px] border-ink">
+              <span className="label">↳ {personal.location}</span>
+              <span className="label text-signal">[ 1 / 1 ]</span>
+            </div>
+          </figure>
+
+          {/* Stickers */}
+          <span className="absolute top-16 -left-3 sm:-left-5 brut bg-white display text-xl sm:text-2xl px-3 pt-1.5 pb-0.5 -rotate-6 brut-shadow">
+            Hello!
+          </span>
+          <span className="absolute bottom-16 -right-2 sm:-right-4 brut bg-ink text-paper label px-3 py-2 rotate-3">
+            {portfolioData.about.terminal.coreStack.slice(0, 3).join(" · ")}
+          </span>
         </div>
       </div>
 
-      {/* 3. Redesigned Left-Aligned Hero HUD Card & Action Component */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.7,
-          delay: 0.25,
-          ease: [0.21, 0.47, 0.32, 0.98],
-        }}
-        className="relative mt-[36svh] sm:mt-[38svh] mx-auto lg:mx-0 lg:mt-0 lg:absolute lg:bottom-12 lg:left-14 z-20 w-full max-w-xl pointer-events-auto"
+      {/* Scroll cue */}
+      <a
+        href="#about"
+        className="hidden lg:flex absolute bottom-6 left-1/2 -translate-x-1/2 items-center gap-2 label hover:text-signal"
       >
-        <div className="relative rounded-3xl p-4 xs:p-5 sm:p-7 glass-panel space-y-3.5 sm:space-y-4 overflow-hidden group">
-          {/* Subtle Top Border Highlight & Ambient Red Glow */}
-          <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-          <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#e50914]/25 rounded-full blur-3xl pointer-events-none transition-opacity group-hover:opacity-100 opacity-60" />
-
-          {/* Telemetry Status Pill */}
-          <div className="flex items-center gap-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-[10px] sm:text-[11px] font-mono tracking-[0.16em] uppercase text-white/90">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              {personal.statusPill}
-            </div>
-          </div>
-
-          {/* High-Impact Editorial Role Title */}
-          <div className="space-y-1">
-            <h1 className="text-[1.65rem] xs:text-3xl lg:text-4xl font-black uppercase tracking-tight text-white leading-[1.05]">
-              <span className="block text-white/90">{personal.rolePrimary}</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/70">
-                {personal.roleSecondary}{" "}
-                <span className="text-[#e50914] drop-shadow-[0_0_30px_rgba(229,9,20,0.55)]">
-                  {personal.roleHighlight}
-                </span>
-              </span>
-            </h1>
-
-            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs sm:text-sm font-semibold uppercase tracking-wider font-mono text-white/80">
-              <span className="text-[#e50914]">✦</span>
-              <span>{personal.subRole}</span>
-            </div>
-
-            <p className="text-xs sm:text-sm text-white/60 leading-relaxed font-sans pt-0.5 max-w-md">
-              {personal.bio}
-            </p>
-          </div>
-
-          {/* Redesigned Action Buttons & Socials */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
-            {/* Primary Action Button */}
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="group/btn relative inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-white text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#e50914] hover:text-white transition-all duration-300 shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:shadow-[0_0_35px_rgba(229,9,20,0.6)] cursor-pointer"
-            >
-              <span>View Projects</span>
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-            </button>
-
-            {/* Secondary Action Button */}
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="group/btn relative inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl glass-pill hover:bg-white/[0.12] text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 cursor-pointer"
-            >
-              <Mail className="h-4 w-4 text-[#e50914] group-hover/btn:scale-110 transition-transform duration-300" />
-              <span>Contact Me</span>
-            </button>
-
-            {/* Quick Links */}
-            <div className="flex items-center gap-2 pl-0 sm:pl-1">
-              <a
-                href={personal.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 sm:p-3 rounded-xl glass-pill hover:bg-white/[0.12] text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center"
-                aria-label="GitHub Profile"
-              >
-                <GithubIcon className="h-4 w-4" />
-              </a>
-              <a
-                href={personal.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 sm:p-3 rounded-xl glass-pill hover:bg-white/[0.12] text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center"
-                aria-label="LinkedIn Profile"
-              >
-                <LinkedinIcon className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+        <ArrowDown className="h-4 w-4 animate-bounce motion-reduce:animate-none" strokeWidth={3} />
+        Scroll
+      </a>
     </section>
   );
 }
