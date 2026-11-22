@@ -1,73 +1,73 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
-  /* Brutalist palette: raw paper, pure ink, signal red. */
-  --paper: #efece4;
-  --ink: #0a0a0a;
-  --signal: #e50914;
+  /*
+    Grunge & glitch palette. "paper" is the dirty charcoal page, "ink" the bone
+    type printed on it, "signal" an acid lime. The two glitch channels are the
+    cyan/red fringes of a misregistered print or a broken video signal.
+  */
+  --paper: #0d0d0f;
+  --ink: #e8e3d5;
+  --signal: #c2ff3d;
+  --signal-fg: #0d0d0f;
+  --glitch-c: #1fe5ff;
+  --glitch-r: #ff2e63;
 
-  --background: #070709;
-  --foreground: #0a0a0a;
+  --background: #0d0d0f;
+  --foreground: #e8e3d5;
 
-  --card: #ffffff;
-  --card-foreground: #0a0a0a;
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
+  --card: #17171a;
+  --card-foreground: #e8e3d5;
 
-  --primary: #e50914;
-  --primary-foreground: #ffffff;
-  --secondary: #0a0a0a;
-  --secondary-foreground: #efece4;
-  --muted: #dedad0;
-  --muted-foreground: #4a4844;
-  --accent: #e50914;
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
+  --primary: #c2ff3d;
+  --primary-foreground: #0d0d0f;
+  --muted: #232326;
+  --muted-foreground: #a8a498;
+  --accent: #c2ff3d;
+  --accent-foreground: #0d0d0f;
 
-  --border: #0a0a0a;
-  --input: #0a0a0a;
-  --ring: #e50914;
-  --radius: 0.75rem;
+  --border: #e8e3d5;
+  --ring: #c2ff3d;
 
   --bw: 3px; /* border weight */
-  --sh: 6px; /* hard shadow offset */
+  --sh: 4px; /* chromatic fringe offset */
+
+  /* Film grain: white specks with noisy alpha. */
+  --tex-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1.6 0 0 0 -0.62'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Vertical scratches. */
+  --tex-scratch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.004' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 9 0 0 0 -6.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  /* Erosion mask: mostly opaque, with blotchy holes eaten out of it. */
+  --tex-erode: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='e'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09' numOctaves='5' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -11 0 0 0 8.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23e)'/%3E%3C/svg%3E");
 }
 
-@theme {
+@theme inline {
   --breakpoint-xs: 30rem;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --color-paper: var(--paper);
   --color-ink: var(--ink);
   --color-signal: var(--signal);
+  --color-signal-fg: var(--signal-fg);
+  --color-glitch-c: var(--glitch-c);
+  --color-glitch-r: var(--glitch-r);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
-  --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
 }
 
 ::selection {
-  background-color: #e50914;
-  color: #ffffff;
+  background-color: var(--signal);
+  color: var(--signal-fg);
 }
 
 html {
@@ -81,8 +81,22 @@ html {
 
 body {
   background-color: var(--background);
+  color: var(--ink);
   overflow-x: clip;
   min-width: 320px;
+}
+
+/* Grain and scratches over the whole page, like a worn print. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  background-image: var(--tex-scratch), var(--tex-grain);
+  background-size: 600px 600px, 260px 260px;
+  opacity: 0.15;
+  mix-blend-mode: screen;
 }
 
 img,
@@ -102,7 +116,7 @@ canvas {
 }
 ::-webkit-scrollbar-track {
   background: var(--paper);
-  border-left: 3px solid var(--ink);
+  border-left: 1px solid rgba(232, 227, 213, 0.25);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--ink);
@@ -112,7 +126,7 @@ canvas {
 }
 
 @layer components {
-  /* Condensed poster type, same face as the hero marquee. */
+  /* Condensed poster type. */
   .display {
     font-family: var(--font-anton), "Impact", sans-serif;
     font-weight: 400;
@@ -121,107 +135,174 @@ canvas {
     line-height: 0.9;
   }
 
-  /* Uppercase mono metadata. */
+  /* Typewriter metadata. */
   .label {
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-family: var(--font-typewriter), ui-monospace, monospace;
+    font-size: 0.8125rem;
+    font-weight: 400;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  /* Thick-bordered box. */
+  /* Marker-pen annotation. */
+  .scribble {
+    font-family: var(--font-marker), cursive;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  /* Bordered box. */
   .brut {
     border: var(--bw) solid var(--ink);
   }
 
-  /* Hard, unblurred offset shadow. */
+  /* Chromatic fringe: cyan bleeds left, red bleeds right. */
   .brut-shadow {
-    box-shadow: var(--sh) var(--sh) 0 0 var(--ink);
-  }
-  .brut-shadow-red {
-    box-shadow: var(--sh) var(--sh) 0 0 var(--signal);
+    box-shadow: var(--sh) 0 0 0 var(--glitch-r), calc(var(--sh) * -1) 0 0 0 var(--glitch-c);
   }
 
-  /* Pressable button: shadow collapses as the button moves into it. */
+  /* Button with a misregistered edge that jitters on hover. */
   .brut-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     border: var(--bw) solid var(--ink);
-    box-shadow: 4px 4px 0 0 var(--ink);
+    box-shadow: 3px 3px 0 0 var(--glitch-r), -3px -3px 0 0 var(--glitch-c);
     padding: 0.75rem 1.25rem;
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
-    font-size: 0.8125rem;
-    font-weight: 800;
+    font-family: var(--font-typewriter), ui-monospace, monospace;
+    font-size: 0.875rem;
+    font-weight: 400;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, background-color 0.12s, color 0.12s;
+    transition: box-shadow 0.1s, background-color 0.12s, color 0.12s;
   }
   .brut-btn:hover {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 0 var(--ink);
+    box-shadow: 6px 0 0 0 var(--glitch-r), -6px 0 0 0 var(--glitch-c);
+    animation: jitter 0.28s steps(1) 1;
   }
   .brut-btn:active {
-    transform: translate(4px, 4px);
-    box-shadow: 0 0 0 0 var(--ink);
+    box-shadow: 0 0 0 0 var(--glitch-r), 0 0 0 0 var(--glitch-c);
   }
 
-  /* Card that lifts toward the viewer on hover. */
+  /* Card whose fringe widens on hover. */
   .brut-lift {
-    transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+    transition: box-shadow 0.12s ease-out;
   }
   .brut-lift:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: calc(var(--sh) + 3px) calc(var(--sh) + 3px) 0 0 var(--ink);
+    box-shadow: 9px 0 0 0 var(--glitch-r), -9px 0 0 0 var(--glitch-c);
   }
 
-  /* Thick-bordered form field. */
+  /* Form field. */
   .brut-field {
     width: 100%;
-    background: #fff;
+    background: var(--paper);
     border: var(--bw) solid var(--ink);
     padding: 0.85rem 1rem;
     font-size: 1rem;
     color: var(--ink);
-    transition: box-shadow 0.1s;
+    transition: box-shadow 0.1s, border-color 0.1s;
   }
   .brut-field::placeholder {
-    color: #8a877f;
+    color: #77746b;
   }
   .brut-field:focus {
     outline: none;
-    box-shadow: 5px 5px 0 0 var(--signal);
+    border-color: var(--signal);
+    box-shadow: 4px 0 0 0 var(--glitch-r), -4px 0 0 0 var(--glitch-c);
   }
 
   /* Diagonal hazard stripes for meters and fills. */
   .stripes {
-    background-image: repeating-linear-gradient(
-      -45deg,
-      var(--signal) 0 8px,
-      #b30710 8px 16px
-    );
+    background-image: repeating-linear-gradient(-45deg, var(--signal) 0 8px, #86b324 8px 16px);
   }
 
-  /* Faint grid paper behind sections. */
+  /* Faint grid behind sections. */
   .grid-paper {
     background-color: var(--paper);
     background-image:
-      linear-gradient(rgba(10, 10, 10, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(10, 10, 10, 0.06) 1px, transparent 1px);
+      linear-gradient(rgba(232, 227, 213, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232, 227, 213, 0.045) 1px, transparent 1px);
     background-size: 32px 32px;
+  }
+
+  /* Eat holes out of an element, as if the print has worn away. */
+  .distress {
+    -webkit-mask-image: var(--tex-erode);
+    mask-image: var(--tex-erode);
+    -webkit-mask-size: 520px 520px;
+    mask-size: 520px 520px;
+  }
+
+  /* Static chromatic split on type. */
+  .rgb-split {
+    text-shadow: -0.035em 0 0 var(--glitch-c), 0.035em 0 0 var(--glitch-r);
+  }
+
+  /* CRT scanlines. */
+  .scanlines {
+    background-image: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 4px);
+  }
+
+  /* Strip of masking tape holding a card down. */
+  .tape {
+    position: absolute;
+    height: 1.5rem;
+    width: 5.5rem;
+    background: rgba(232, 227, 213, 0.55);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    -webkit-mask-image: var(--tex-erode);
+    mask-image: var(--tex-erode);
+    pointer-events: none;
+  }
+
+  /*
+    Glitch: two displaced slices of the element flicker in and out.
+    Needs data-text holding the same text as the element.
+  */
+  .glitch {
+    position: relative;
+  }
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    padding: inherit;
+    background: inherit;
+    color: inherit;
+    pointer-events: none;
+    clip-path: inset(100% 0 0 0);
+  }
+  .glitch::before {
+    text-shadow: -3px 0 0 var(--glitch-c);
+    animation: glitch-a 4.2s steps(1) infinite;
+  }
+  .glitch::after {
+    text-shadow: 3px 0 0 var(--glitch-r);
+    animation: glitch-b 5.3s steps(1) infinite;
   }
 }
 
-/* Hero: hard red offset shadow on the cutout, plus a one-time entrance. */
+/* Hero portrait: chromatic fringe around the cutout, plus a flickering slice. */
 .hero-portrait {
-  filter: drop-shadow(14px 6px 0 var(--signal));
+  filter: drop-shadow(-7px 0 0 var(--glitch-c)) drop-shadow(7px 0 0 var(--glitch-r));
   animation: hero-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-slice {
+  clip-path: inset(100% 0 0 0);
+  animation: slice 5s steps(1) infinite;
+}
+.hero-name {
+  animation: name-jump 6s steps(1) infinite;
 }
 .hero-in {
   animation: hero-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
+.blink {
+  animation: blink 1.2s steps(1) infinite;
+}
+
 @keyframes hero-up {
   from {
     transform: translateY(48px);
@@ -231,6 +312,128 @@ canvas {
   from {
     opacity: 0;
     transform: translateY(16px);
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes jitter {
+  0% {
+    transform: translate(-3px, 1px) skewX(-6deg);
+  }
+  25% {
+    transform: translate(3px, -1px) skewX(4deg);
+  }
+  50% {
+    transform: translate(-2px, 0);
+  }
+  75% {
+    transform: translate(2px, 1px) skewX(-2deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes glitch-a {
+  0%,
+  100% {
+    clip-path: inset(100% 0 0 0);
+    transform: none;
+  }
+  3% {
+    clip-path: inset(12% 0 62% 0);
+    transform: translateX(-10px);
+  }
+  6% {
+    clip-path: inset(58% 0 20% 0);
+    transform: translateX(8px);
+  }
+  9% {
+    clip-path: inset(100% 0 0 0);
+    transform: none;
+  }
+  52% {
+    clip-path: inset(34% 0 44% 0);
+    transform: translateX(12px);
+  }
+  55% {
+    clip-path: inset(100% 0 0 0);
+    transform: none;
+  }
+}
+@keyframes glitch-b {
+  0%,
+  100% {
+    clip-path: inset(100% 0 0 0);
+    transform: none;
+  }
+  31% {
+    clip-path: inset(70% 0 8% 0);
+    transform: translateX(10px);
+  }
+  34% {
+    clip-path: inset(22% 0 55% 0);
+    transform: translateX(-12px);
+  }
+  37% {
+    clip-path: inset(100% 0 0 0);
+    transform: none;
+  }
+  78% {
+    clip-path: inset(5% 0 80% 0);
+    transform: translateX(-8px);
+  }
+  81% {
+    clip-path: inset(100% 0 0 0);
+    transform: none;
+  }
+}
+@keyframes slice {
+  0%,
+  100% {
+    clip-path: inset(100% 0 0 0);
+    transform: none;
+  }
+  40% {
+    clip-path: inset(30% 0 58% 0);
+    transform: translateX(-26px);
+  }
+  42% {
+    clip-path: inset(52% 0 38% 0);
+    transform: translateX(22px);
+  }
+  44% {
+    clip-path: inset(18% 0 74% 0);
+    transform: translateX(14px);
+  }
+  46% {
+    clip-path: inset(100% 0 0 0);
+    transform: none;
+  }
+  86% {
+    clip-path: inset(64% 0 22% 0);
+    transform: translateX(-18px);
+  }
+  88% {
+    clip-path: inset(100% 0 0 0);
+    transform: none;
+  }
+}
+@keyframes name-jump {
+  0%,
+  100% {
+    transform: none;
+  }
+  40% {
+    transform: translateX(-14px) skewX(-4deg);
+  }
+  42% {
+    transform: translateX(10px);
+  }
+  44% {
+    transform: none;
   }
 }
 
@@ -249,14 +452,16 @@ canvas {
 
 @media (max-width: 640px) {
   :root {
-    --sh: 4px;
+    --sh: 3px;
+  }
+  .hero-portrait {
+    filter: drop-shadow(-4px 0 0 var(--glitch-c)) drop-shadow(4px 0 0 var(--glitch-r));
   }
 }
 
 @media (hover: none) {
   .brut-lift:hover {
-    transform: none;
-    box-shadow: var(--sh) var(--sh) 0 0 var(--ink);
+    box-shadow: var(--sh) 0 0 0 var(--glitch-r), calc(var(--sh) * -1) 0 0 0 var(--glitch-c);
   }
 }
 
@@ -266,7 +471,13 @@ canvas {
   }
   .ticker-track,
   .hero-portrait,
-  .hero-in {
+  .hero-slice,
+  .hero-name,
+  .hero-in,
+  .blink,
+  .glitch::before,
+  .glitch::after,
+  .brut-btn:hover {
     animation: none;
   }
   .brut-btn,

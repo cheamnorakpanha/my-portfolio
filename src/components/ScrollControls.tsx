@@ -22,7 +22,7 @@ export default function ScrollControls() {
         <button
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="brut-btn fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 !p-0 h-12 w-12 bg-signal text-white"
+          className="brut-btn fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 !p-0 h-12 w-12 bg-signal text-signal-fg"
           aria-label="Scroll to top"
         >
           <ArrowUp className="h-5 w-5" strokeWidth={3} />

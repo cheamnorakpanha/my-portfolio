@@ -14,9 +14,9 @@ export default function About() {
   const { about, education, projects, experience, certifications } = portfolioData;
 
   const facts = [
-    { value: education.length, label: "Degrees", tone: "bg-signal text-white" },
+    { value: education.length, label: "Degrees", tone: "bg-signal text-signal-fg" },
     { value: projects.length, label: "Projects", tone: "bg-ink text-paper" },
-    { value: experience.length, label: "Roles", tone: "bg-white text-ink" },
+    { value: experience.length, label: "Roles", tone: "bg-card text-ink" },
     { value: certifications.length, label: "Certs", tone: "bg-paper text-ink" },
   ];
 
@@ -34,14 +34,14 @@ export default function About() {
         <div className="grid gap-6 lg:grid-cols-12">
           {/* Lead */}
           <Reveal className="lg:col-span-5 brut brut-shadow bg-ink text-paper p-6 sm:p-8 flex flex-col justify-between gap-10">
-            <p className="label text-signal">{"// Thesis"}</p>
+            <p className="label opacity-70">{"// Thesis"}</p>
             <p className="display text-[2.5rem] xs:text-5xl sm:text-6xl leading-[0.95] [overflow-wrap:anywhere]">
-              Full-stack engineering, grounded in <span className="text-signal">clear communication.</span>
+              Full-stack engineering, grounded in <span className="bg-paper text-signal px-2 box-decoration-clone">clear communication.</span>
             </p>
           </Reveal>
 
           {/* Narrative */}
-          <Reveal delay={0.06} className="lg:col-span-7 brut brut-shadow bg-white p-6 sm:p-8 space-y-5 text-base sm:text-lg leading-relaxed">
+          <Reveal delay={0.06} className="lg:col-span-7 brut brut-shadow bg-card p-6 sm:p-8 space-y-5 text-base sm:text-lg leading-relaxed">
             <p>
               I specialize in designing and engineering high-throughput microservices, robust relational
               databases, and modern interactive web experiences. Whether optimizing database latency in
@@ -50,7 +50,7 @@ export default function About() {
             </p>
             <p>
               Holding a dual-degree background in{" "}
-              <mark className="bg-signal text-white px-1 font-semibold">Information Technology Engineering</mark>{" "}
+              <mark className="bg-signal text-signal-fg px-1 font-semibold">Information Technology Engineering</mark>{" "}
               from the Royal University of Phnom Penh (RUPP) and{" "}
               <mark className="bg-ink text-paper px-1 font-semibold">Professional Communication</mark> from the
               Institute of Foreign Languages (IFL), I bring both technical rigor and the ability to articulate
@@ -76,8 +76,8 @@ export default function About() {
         {/* Principles */}
         <div className="mt-16 grid gap-6 md:grid-cols-3">
           {about.highlights.map((item, idx) => (
-            <Reveal key={item.title} delay={idx * 0.06} className="relative brut brut-shadow bg-white p-6 pt-10">
-              <span className="absolute -top-4 left-4 brut bg-signal text-white display text-2xl px-2 pt-1 rotate-[-4deg]">
+            <Reveal key={item.title} delay={idx * 0.06} className="relative brut brut-shadow bg-card p-6 pt-10">
+              <span className="absolute -top-4 left-4 brut bg-signal text-signal-fg display text-2xl px-2 pt-1 rotate-[-4deg]">
                 {String(idx + 1).padStart(2, "0")}
               </span>
               <h3 className="display text-3xl">{item.title}</h3>
@@ -87,10 +87,10 @@ export default function About() {
         </div>
 
         {/* Toolkit table */}
-        <Reveal className="mt-16 brut brut-shadow bg-white">
+        <Reveal className="mt-16 brut brut-shadow bg-card">
           <div className="flex items-center justify-between bg-ink text-paper px-4 py-3">
             <h3 className="label">Toolkit.exe</h3>
-            <span className="label text-signal" aria-hidden="true">■ ■ ■</span>
+            <span className="label text-glitch-r" aria-hidden="true">■ ■ ■</span>
           </div>
           <ul>
             {toolkit.map((group) => (
@@ -103,7 +103,7 @@ export default function About() {
                 </span>
                 <span className="sm:col-span-9 flex flex-wrap gap-2 px-4 py-3">
                   {group.items.map((item) => (
-                    <span key={item} className="label border-2 border-ink px-2 py-1 hover:bg-signal hover:text-white transition-colors">
+                    <span key={item} className="label border-2 border-ink px-2 py-1 hover:bg-signal hover:text-signal-fg transition-colors">
                       {item}
                     </span>
                   ))}

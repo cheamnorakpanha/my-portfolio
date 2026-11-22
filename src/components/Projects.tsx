@@ -47,10 +47,10 @@ export default function Projects() {
                 aria-pressed={active}
                 disabled={counts[c] === 0}
                 onClick={() => setCategory(c)}
-                className={`brut-btn !px-3 !py-2 disabled:opacity-40 ${active ? "bg-ink text-paper" : "bg-white text-ink"}`}
+                className={`brut-btn !px-3 !py-2 disabled:opacity-40 ${active ? "bg-ink text-paper" : "bg-card text-ink"}`}
               >
                 {c}
-                <span className={`px-1.5 ${active ? "bg-signal text-white" : "bg-ink text-paper"}`}>{counts[c]}</span>
+                <span className={`px-1.5 ${active ? "bg-signal text-signal-fg" : "bg-ink text-paper"}`}>{counts[c]}</span>
               </button>
             );
           })}
@@ -67,11 +67,11 @@ export default function Projects() {
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.2 }}
               >
-                <article className="group h-full flex flex-col brut brut-shadow brut-lift bg-white">
+                <article className="group h-full flex flex-col brut brut-shadow brut-lift bg-card">
                   {/* Window bar */}
                   <div className="flex items-center justify-between bg-ink text-paper px-4 py-2.5">
                     <span className="label">
-                      <span className="text-signal">#{project.number}</span> / {project.category}
+                      <span className="text-glitch-r">#{project.number}</span> / {project.category}
                     </span>
                     <span className="flex gap-1.5" aria-hidden="true">
                       <span className="h-3 w-3 border-2 border-paper" />
@@ -89,7 +89,7 @@ export default function Projects() {
                       className="object-cover grayscale contrast-125 transition duration-300 group-hover:grayscale-0 group-hover:contrast-100"
                     />
                     <span
-                      className={`absolute bottom-3 right-3 brut bg-signal text-white label px-2.5 py-1.5 ${
+                      className={`absolute bottom-3 right-3 brut bg-signal text-signal-fg label px-2.5 py-1.5 ${
                         idx % 2 ? "rotate-2" : "-rotate-2"
                       }`}
                     >
@@ -117,7 +117,7 @@ export default function Projects() {
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="brut-btn bg-signal text-white"
+                        className="brut-btn bg-signal text-signal-fg"
                       >
                         Live demo <ArrowUpRight className="h-4 w-4" strokeWidth={3} />
                         <span className="sr-only">for {project.title} (opens in new tab)</span>
@@ -126,7 +126,7 @@ export default function Projects() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="brut-btn bg-white text-ink"
+                        className="brut-btn bg-card text-ink"
                       >
                         <GithubIcon className="h-4 w-4" /> Source
                         <span className="sr-only">for {project.title} (opens in new tab)</span>
@@ -142,7 +142,7 @@ export default function Projects() {
         {/* More on GitHub */}
         <div className="mt-12 brut brut-shadow bg-ink text-paper p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <p className="display text-3xl sm:text-4xl">
-            More code lives on <span className="text-signal">GitHub</span>
+            More code lives on <span className="bg-paper text-signal px-2">GitHub</span>
           </p>
           <a
             href={portfolioData.personal.socials.github}
