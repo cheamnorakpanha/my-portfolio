@@ -214,6 +214,26 @@ canvas {
   }
 }
 
+/* Hero: hard red offset shadow on the cutout, plus a one-time entrance. */
+.hero-portrait {
+  filter: drop-shadow(14px 6px 0 var(--signal));
+  animation: hero-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-in {
+  animation: hero-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes hero-up {
+  from {
+    transform: translateY(48px);
+  }
+}
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
 /* Infinite ticker band. */
 @keyframes ticker {
   from {
@@ -244,7 +264,9 @@ canvas {
   html {
     scroll-behavior: auto;
   }
-  .ticker-track {
+  .ticker-track,
+  .hero-portrait,
+  .hero-in {
     animation: none;
   }
   .brut-btn,
