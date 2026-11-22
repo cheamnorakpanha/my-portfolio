@@ -18,7 +18,7 @@ export default function Experience() {
           aside={
             <>
               <p>Cross-platform engineering, academic degrees, and industry credentials.</p>
-              <a href={personal.resumeUrl} download className="brut-btn bg-signal text-white mt-5">
+              <a href={personal.resumeUrl} download className="brut-btn bg-signal text-signal-fg mt-5">
                 <ArrowDown className="h-4 w-4" strokeWidth={3} />
                 Download CV (PDF)
               </a>
@@ -27,7 +27,7 @@ export default function Experience() {
         />
 
         {/* Work log */}
-        <Reveal className="brut brut-shadow bg-white">
+        <Reveal className="brut brut-shadow bg-card">
           <h3 className="label bg-ink text-paper px-4 py-3">Work.log</h3>
           <ol>
             {experience.map((job) => (
@@ -35,7 +35,7 @@ export default function Experience() {
                 key={job.company + job.position}
                 className="grid lg:grid-cols-12 border-t-[3px] border-ink"
               >
-                <div className="lg:col-span-3 bg-signal text-white p-5 lg:border-r-[3px] border-b-[3px] lg:border-b-0 border-ink">
+                <div className="lg:col-span-3 bg-signal text-signal-fg p-5 lg:border-r-[3px] border-b-[3px] lg:border-b-0 border-ink">
                   <p className="label">{job.duration}</p>
                 </div>
                 <div className="lg:col-span-9 p-5 sm:p-6">
@@ -62,7 +62,7 @@ export default function Experience() {
           <div className="lg:col-span-7 space-y-6">
             <h3 className="label inline-block bg-ink text-paper px-3 py-2">Education</h3>
             {education.map((edu, idx) => (
-              <Reveal key={edu.degree} delay={idx * 0.05} className="brut brut-shadow bg-white p-5 sm:p-6">
+              <Reveal key={edu.degree} delay={idx * 0.05} className="brut brut-shadow bg-card p-5 sm:p-6">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <h4 className="display text-2xl sm:text-3xl">{edu.degree}</h4>
                   <span className="label border-2 border-ink px-2 py-1">{edu.duration}</span>
@@ -82,7 +82,7 @@ export default function Experience() {
                   href={cert.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-start justify-between gap-4 brut brut-shadow brut-lift bg-white p-5 hover:bg-ink hover:text-paper"
+                  className="group flex items-start justify-between gap-4 brut brut-shadow brut-lift bg-card p-5 hover:bg-ink hover:text-paper"
                 >
                   <span>
                     <span className="block font-bold text-lg leading-snug">{cert.title}</span>
@@ -90,7 +90,7 @@ export default function Experience() {
                       {cert.issuer} · {cert.date}
                     </span>
                   </span>
-                  <span className="brut bg-signal text-white p-1 shrink-0 group-hover:border-paper">
+                  <span className="brut bg-signal text-signal-fg p-1 shrink-0 group-hover:border-paper">
                     <ArrowUpRight className="h-4 w-4" strokeWidth={3} />
                   </span>
                   <span className="sr-only">(opens in new tab)</span>

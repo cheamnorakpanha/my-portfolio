@@ -10,7 +10,7 @@ const words = [
   "Phnom Penh",
 ];
 
-/** Red marquee band that hard-cuts from the dark hero into the paper sections. */
+/** Acid marquee band between the hero and the first section. */
 export default function Ticker() {
   const run = (hidden: boolean) => (
     <div className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
@@ -24,7 +24,7 @@ export default function Ticker() {
   );
 
   return (
-    <div className="relative z-10 overflow-hidden bg-signal text-white border-y-[3px] border-ink py-3">
+    <div className="relative z-10 overflow-hidden bg-signal text-signal-fg border-y-[3px] border-ink py-3">
       <div className="ticker-track flex w-max">
         {run(false)}
         {run(true)}

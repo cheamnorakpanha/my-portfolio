@@ -46,14 +46,14 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-ink text-paper border-b-[3px] border-signal">
+    <header className="fixed inset-x-0 top-0 z-50 bg-paper text-ink border-b-[3px] border-signal">
       <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-stretch justify-between pl-4 sm:pl-6 lg:pl-8">
         <a
           href="#home"
           onClick={(e) => go(e, "home")}
           className="flex items-center gap-2 display text-xl sm:text-2xl tracking-wide hover:text-signal transition-colors"
         >
-          <span className="bg-signal text-white px-1.5 leading-tight">NP</span>
+          <span className="bg-signal text-signal-fg px-1.5 leading-tight">NP</span>
           Norakpanha
         </a>
 
@@ -66,11 +66,11 @@ export default function Navbar() {
                 href={`#${item.id}`}
                 onClick={(e) => go(e, item.id)}
                 aria-current={active ? "true" : undefined}
-                className={`label flex items-center gap-1.5 px-4 border-l-[3px] border-paper/15 transition-colors ${
-                  active ? "bg-paper text-ink" : "hover:bg-signal hover:text-white"
+                className={`label flex items-center gap-1.5 px-4 border-l-[3px] border-ink/15 transition-colors ${
+                  active ? "bg-ink text-paper" : "hover:bg-signal hover:text-signal-fg"
                 }`}
               >
-                <span className={active ? "text-signal" : "opacity-50"}>{String(idx + 1).padStart(2, "0")}</span>
+                <span className={active ? "text-glitch-r" : "opacity-50"}>{String(idx + 1).padStart(2, "0")}</span>
                 {item.name}
               </a>
             );
@@ -81,7 +81,7 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={(e) => go(e, "contact")}
-            className="hidden sm:flex items-center gap-1.5 bg-signal px-5 label text-white border-l-[3px] border-ink hover:bg-paper hover:text-ink transition-colors"
+            className="hidden sm:flex items-center gap-1.5 bg-signal px-5 label text-signal-fg border-l-[3px] border-ink hover:bg-ink hover:text-paper transition-colors"
           >
             Hire me
             <ArrowUpRight className="h-4 w-4" strokeWidth={3} />
@@ -89,7 +89,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
-            className="md:hidden flex w-14 items-center justify-center border-l-[3px] border-paper/15 hover:bg-signal"
+            className="md:hidden flex w-14 items-center justify-center border-l-[3px] border-ink/15 hover:bg-signal hover:text-signal-fg"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -112,7 +112,7 @@ export default function Navbar() {
                   href={`#${item.id}`}
                   onClick={(e) => go(e, item.id)}
                   className={`flex items-center justify-between brut brut-shadow px-4 py-3 ${
-                    activeSection === item.id ? "bg-signal text-white" : "bg-white"
+                    activeSection === item.id ? "bg-signal text-signal-fg" : "bg-card"
                   }`}
                 >
                   <span className="display text-4xl">{item.name}</span>

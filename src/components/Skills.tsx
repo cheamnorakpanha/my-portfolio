@@ -9,7 +9,7 @@ import { portfolioData } from "@/data/portfolio";
 function Bar({ level, delay = 0, tall = false }: { level: number; delay?: number; tall?: boolean }) {
   const reduce = useReducedMotion();
   return (
-    <div className={`relative w-full border-2 border-ink bg-white ${tall ? "h-6" : "h-4"}`} aria-hidden="true">
+    <div className={`relative w-full border-2 border-ink bg-card ${tall ? "h-6" : "h-4"}`} aria-hidden="true">
       <motion.div
         className="absolute inset-y-0 left-0 stripes border-r-2 border-ink origin-left"
         style={{ width: `${level}%` }}
@@ -42,12 +42,12 @@ export default function Skills() {
             <Reveal
               key={skill.name}
               delay={idx * 0.06}
-              className={`brut brut-shadow p-6 ${idx === 0 ? "bg-ink text-paper" : "bg-white"}`}
+              className={`brut brut-shadow p-6 ${idx === 0 ? "bg-ink text-paper" : "bg-card"}`}
             >
               <p className="label">{skill.name}</p>
               <p className="display text-[6.5rem] sm:text-[7rem] lg:text-[9rem] leading-none mt-3">
                 {skill.level}
-                <span className="text-signal text-5xl align-top">%</span>
+                <span className={`text-5xl align-top ${idx === 0 ? "text-glitch-r" : "text-signal"}`}>%</span>
               </p>
               <div className="mt-4">
                 <Bar level={skill.level} tall delay={0.1 + idx * 0.08} />
@@ -59,8 +59,8 @@ export default function Skills() {
         {/* Categories */}
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {skills.categories.map((category, catIdx) => (
-            <Reveal key={category.title} delay={catIdx * 0.05} className="brut brut-shadow bg-white">
-              <h3 className="flex items-center justify-between gap-2 bg-signal text-white px-4 py-3 border-b-[3px] border-ink">
+            <Reveal key={category.title} delay={catIdx * 0.05} className="brut brut-shadow bg-card">
+              <h3 className="flex items-center justify-between gap-2 bg-signal text-signal-fg px-4 py-3 border-b-[3px] border-ink">
                 <span className="label">{category.title}</span>
                 <span className="label">[{String(catIdx + 1).padStart(2, "0")}]</span>
               </h3>

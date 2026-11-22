@@ -51,7 +51,7 @@ export default function Contact() {
         />
 
         {/* Email slab */}
-        <Reveal className="brut brut-shadow bg-signal text-white p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <Reveal className="brut brut-shadow bg-signal text-signal-fg p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="min-w-0">
             <p className="label">Write to</p>
             <a
@@ -61,7 +61,7 @@ export default function Contact() {
               {personal.email}
             </a>
           </div>
-          <button type="button" onClick={copyEmail} className="brut-btn bg-white text-ink self-start lg:self-auto shrink-0">
+          <button type="button" onClick={copyEmail} className="brut-btn bg-card text-ink self-start lg:self-auto shrink-0">
             {copied ? <Check className="h-4 w-4" strokeWidth={3} /> : <Copy className="h-4 w-4" strokeWidth={3} />}
             <span aria-live="polite">{copied ? "Copied!" : "Copy email"}</span>
           </button>
@@ -69,7 +69,7 @@ export default function Contact() {
 
         <div className="mt-8 grid gap-8 lg:grid-cols-12">
           {/* Channels */}
-          <Reveal className="lg:col-span-5 brut brut-shadow bg-white self-start w-full">
+          <Reveal className="lg:col-span-5 brut brut-shadow bg-card self-start w-full">
             <h3 className="label bg-ink text-paper px-4 py-3">Channels</h3>
             <dl>
               {channels.map((c) => (
@@ -81,7 +81,7 @@ export default function Contact() {
                         href={c.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="underline decoration-2 underline-offset-4 hover:bg-signal hover:text-white"
+                        className="underline decoration-2 underline-offset-4 hover:bg-signal hover:text-signal-fg"
                       >
                         {c.value}
                       </a>
@@ -95,7 +95,7 @@ export default function Contact() {
           </Reveal>
 
           {/* Form */}
-          <Reveal delay={0.06} className="lg:col-span-7 brut brut-shadow bg-white">
+          <Reveal delay={0.06} className="lg:col-span-7 brut brut-shadow bg-card">
             <h3 className="label bg-ink text-paper px-4 py-3">New_message.txt</h3>
             <form onSubmit={onSubmit} className="p-5 sm:p-6 space-y-5">
               <div className="grid gap-5 sm:grid-cols-2">
@@ -149,7 +149,7 @@ export default function Contact() {
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
                 <p className="text-sm text-muted-foreground">Opens your email app with the message ready to send.</p>
-                <button type="submit" className="brut-btn bg-signal text-white !px-7 !py-4">
+                <button type="submit" className="brut-btn bg-signal text-signal-fg !px-7 !py-4">
                   Send message <ArrowUpRight className="h-4 w-4" strokeWidth={3} />
                 </button>
               </div>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Anton } from "next/font/google";
+import { Geist, Geist_Mono, Anton, Special_Elite, Permanent_Marker } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { portfolioData } from "@/data/portfolio";
@@ -20,13 +20,25 @@ const anton = Anton({
   variable: "--font-anton",
 });
 
+const typewriter = Special_Elite({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-typewriter",
+});
+
+const marker = Permanent_Marker({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-marker",
+});
+
 const { personal } = portfolioData;
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#08080a",
+  themeColor: "#0d0d0f",
 };
 
 export const metadata: Metadata = {
@@ -63,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="dark h-full scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} ${typewriter.variable} ${marker.variable} font-sans antialiased`}
       >
         <ThemeProvider
           attribute="class"
